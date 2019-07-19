@@ -156,7 +156,8 @@ export default {
       version: process.env.VERSION,
       pages: [
         { icon: "widgets", title: "Control Panel", path: "/" },
-        { icon: "settings", title: "Settings", path: "/settings" }
+        { icon: "settings", title: "Settings", path: "/settings" },
+        { icon: "face", title: "Mesh", path: "/mesh" }
       ],
       status: "",
       statusColor: "",
@@ -176,6 +177,9 @@ export default {
           break;
         case "ControlPanel":
           this.title = "Control Panel";
+          break;
+        case "Mesh":
+          this.title = "Mesh graph";
           break;
         default:
           this.title = "";
