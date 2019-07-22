@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         activeNodes() {
-            return this.nodes.filter(n => !n.failed);
+            return this.nodes.filter(n => n.node_id !== 0 && n.status !== 'Removed');
         }
     },
     watch: {
@@ -42,14 +42,14 @@ export default {
                     w: 500,
                     h: 500
                 },
-                force: 350,
+                force: 1500,
                 offset: {
                     x: 0,
                     y: 0
                 },
                 nodeSize: 20,
                 linkWidth: 1,
-                nodeLabels: false,
+                nodeLabels: true,
                 linkLabels: false,
                 strLinks: true
             }
@@ -62,22 +62,23 @@ export default {
         convertNode(n) {
             return {
                 id: n.node_id,
-                _color: this.colorNode(n),
+                _cssClass: this.nodeClass(n),
+                name: n.product,
                 node_id: n.node_id,
                 status: n.status,
                 failed: n.failed
             };
         },
-        colorNode(n) {
+        nodeClass(n) {
             if (n.node_id === 1) {
-                return 'purple';
-            }
-            
-            if (n.status === 'Sleep') {
-                return 'yellow';
+                return 'controller';
             }
 
-            return 'green';
+            if (n.status === 'Sleep') {
+                return 'sleep';
+            }
+
+            return 'alive';
         },
         apiRequest(apiName, args) {
         if (this.socket.connected) {
@@ -93,7 +94,9 @@ export default {
     },
     mounted() {
         var self = this;
-
+        self.options.size.w = this.$el.clientWidth
+        self.options.size.h = this.$el.clientHeight
+        
         this.socket = io(ConfigApis.getSocketIP());
 
         this.socket.on("connect", () => {
@@ -124,33 +127,26 @@ export default {
             self.homeHex = info.name;
         });
 
-        this.socket.on("NODE_REMOVED", node => {
-            self.$set(self.nodes, node.node_id, node);
-        });
+        //this.socket.on("NODE_REMOVED", node => {
+        //    self.$set(self.nodes, node.node_id, node);
+        //});
 
         this.socket.on("INIT", data => {
-            //convert node values in array
             var nodes = data.nodes;
             for (var i = 0; i < nodes.length; i++) {
                 self.nodes.push(self.convertNode(nodes[i]));
-                
             }
             
-            for (var i = 0; i < self.nodes.length; i++) {
-                if (!self.nodes[i].failed)
-                    self.apiRequest('getNodeNeighbors', [self.nodes[i].node_id]);
-            }
-
             self.cnt_status = data.error ? data.error : data.cntStatus;
-            self.homeid = data.info.homeid;
-            self.homeHex = data.info.name;
+
+            for (var i = 0; i < nodes.length; i++) {
+                self.apiRequest('getNodeNeighbors', [nodes[i].node_id]);
+            }
         });
 
         this.socket.on("NODE_UPDATED", data => {
             var node = self.convertNode(data);
-            if (!self.nodes[data.node_id] || self.nodes[data.node_id].failed) {
-                //add missing nodes
-                while (self.nodes.length < data.node_id)
+            if (!self.nodes[data.node_id]) {
                 self.nodes.push(node);
             }
 
@@ -161,11 +157,9 @@ export default {
             if (data.success) {
                 switch (data.api) {
                 case "getNodeNeighbors":
-                    //console.log(data.result);
-                    //confirm("Node neighbors \n" + self.jsonToList(data.result));
                     var neighbors = data.result;
                     for (var i = 0; i < neighbors.length; i++) {
-                        if (self.nodes[neighbors[i]] && !self.nodes[neighbors[i]].failed)
+                        if (self.nodes[neighbors[i]])
                         self.links.push({
                             sid: data.args[0],
                             tid: neighbors[i],
