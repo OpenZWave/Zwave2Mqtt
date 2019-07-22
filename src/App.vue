@@ -157,7 +157,7 @@ export default {
       pages: [
         { icon: "widgets", title: "Control Panel", path: "/" },
         { icon: "settings", title: "Settings", path: "/settings" },
-        { icon: "face", title: "Mesh", path: "/mesh" }
+        { icon: "games", title: "Network graph", path: "/mesh" }
       ],
       status: "",
       statusColor: "",
@@ -179,7 +179,7 @@ export default {
           this.title = "Control Panel";
           break;
         case "Mesh":
-          this.title = "Mesh graph";
+          this.title = "Network graph";
           break;
         default:
           this.title = "";
