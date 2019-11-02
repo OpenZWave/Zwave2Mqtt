@@ -7,8 +7,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'occupancy',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'motion'
     }
@@ -17,8 +17,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'presence',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'presence'
     }
@@ -27,8 +27,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'contact',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'door'
     }
@@ -37,8 +37,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'lock',
     discovery_payload: {
-      payload_on: false,
-      payload_off: true,
+      payload_on: "false",
+      payload_off: "true",
       value_template: '{{ value_json.value }}',
       device_class: 'lock'
     }
@@ -47,8 +47,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'water_leak',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'moisture'
     }
@@ -57,8 +57,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'smoke',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'smoke'
     }
@@ -67,8 +67,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'gas',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'gas'
     }
@@ -77,8 +77,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'carbon_monoxide',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'safety'
     }
@@ -87,8 +87,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'tamper',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'safety'
     }
@@ -97,8 +97,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'alarm',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'problem'
     }
@@ -107,8 +107,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'router',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value }}',
       device_class: 'connectivity'
     }
@@ -117,8 +117,8 @@ module.exports = {
     type: 'binary_sensor',
     object_id: 'battery_low',
     discovery_payload: {
-      payload_on: true,
-      payload_off: false,
+      payload_on: "true",
+      payload_off: "false",
       value_template: '{{ value_json.value}}',
       device_class: 'battery'
     }
@@ -333,8 +333,8 @@ module.exports = {
     type: 'switch',
     object_id: 'switch',
     discovery_payload: {
-      payload_off: false,
-      payload_on: true,
+      payload_off: "false",
+      payload_on: "true",
       value_template: '{{ value_json.value }}',
       command_topic: true
     }
