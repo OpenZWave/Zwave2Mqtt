@@ -1054,11 +1054,7 @@ export default {
       this.setName(n)
     },
     setName (n) {
-<<<<<<< HEAD
-      n._name = n.name + (n.loc ? ' (' + n.loc + ')' : '') || 'NodeID_' + n.node_id
-=======
       n._name = n.name ? (n.name + (n.loc ? ' (' + n.loc + ')' : '')) : 'NodeID_' + n.node_id
->>>>>>> upstream/master
     }
   },
   mounted () {
