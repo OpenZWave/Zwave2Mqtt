@@ -108,6 +108,17 @@
                     </v-flex>
                     <v-flex xs6>
                       <v-text-field
+                        v-model.number="zwave.commandsTimeout"
+                        label="Commands timeout"
+                        :rules="[rules.required]"
+                        required
+                        suffix="seconds"
+                        hint="Seconds to wait before stop inclusion/exclusion mode"
+                        type="number"
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6>
+                      <v-text-field
                         v-model.trim="zwave.configPath"
                         label="Config Path"
                         required

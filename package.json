@@ -1,6 +1,6 @@
 {
   "name": "zwave2mqtt",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "bin": "bin/www",
   "description": "Zwave To MQTT Gateway",
   "author": "Daniel Lando <daniel.sorridi@gmail.com>",
@@ -91,6 +91,7 @@
     "jsonfile": "^4.0.0",
     "morgan": "~1.9.0",
     "mqtt": "^2.15.1",
+    "mqtt-nedb-store": "^0.1.1",
     "nedb": "^1.8.0",
     "openzwave-shared": "^1.6.2",
     "serialport": "^8.0.6",
