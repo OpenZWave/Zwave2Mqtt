@@ -27,7 +27,7 @@ jobs:
         repository: OpenZWave/open-zwave
         path: open-zwave
     - name: Install Openzwave
-    - run: |
+      run: |
         cd open-zwave
         sudo make install
         sudo ldconfig /usr/local/lib /usr/local/lib64
