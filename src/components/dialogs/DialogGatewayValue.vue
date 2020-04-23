@@ -141,7 +141,7 @@ export default {
   },
   computed: {
     deviceValues () {
-      var device = this.devices.find(d => d.value == this.editedValue.device)
+      var device = this.devices.find(d => d.value == this.editedValue.device) // eslint-disable-line eqeqeq
       return device ? device.values : []
     },
     deviceClasses () {
@@ -149,7 +149,8 @@ export default {
 
       if (!v) return []
 
-      if (v.class_id == 0x30) // sensor binary
+      // sensor binary
+      if (v.class_id == 0x30) // eslint-disable-line eqeqeq
       { return ['battery', 'cold', 'connectivity', 'door', 'garage_door', 'gas', 'heat', 'light', 'lock', 'moisture', 'motion', 'moving', 'occupancy', 'opening', 'plug', 'power', 'presence', 'problem', 'safety', 'smoke', 'sound', 'vibration', 'window'] }
 
       if (this.isSensor(v)) // sensor multilevel and meters
