@@ -7,20 +7,17 @@ const mod = require('../../lib/Constants')
 
 describe('#Constants', () => {
   describe('#productionType()', () => {
-    it('instant', () =>
-      mod.productionType(0).should.deep.equal({ objectId: 'instant', props: { device_class: 'power' }, sensor: 'energy_production' })
-    )
-    it('total', () =>
-      mod.productionType(1).should.deep.equal({ objectId: 'total', props: { device_class: 'power' }, sensor: 'energy_production' })
-    )
-    it('today', () =>
-      mod.productionType(2).should.deep.equal({ objectId: 'today', props: { device_class: 'power' }, sensor: 'energy_production' })
-    )
-    it('time', () =>
-      mod.productionType(3).should.deep.equal({ objectId: 'time', props: { device_class: 'timestamp' }, sensor: 'energy_production' })
+    var map = mod._productionMap
+    before(() => { mod._productionMap = {1: 'foo'} })
+    after(() => { mod._productionMap = map })
+    it('known', () =>
+      mod.productionType(1).should.deep.equal({ objectId: 'foo', props: { device_class: 'power' }, sensor: 'energy_production' })
     )
     it('unknown', () =>
-      mod.productionType(4).should.deep.equal({ objectId: 'unknown', props: { device_class: 'power' }, sensor: 'energy_production' })
+      mod.productionType(2).should.deep.equal({ objectId: 'unknown', props: { device_class: 'power' }, sensor: 'energy_production' })
+    )
+    it('timestamp', () =>
+      mod.productionType(3).should.deep.equal({ objectId: 'unknown', props: { device_class: 'timestamp' }, sensor: 'energy_production' })
     )
   })
   describe('#meterType()', () => {
