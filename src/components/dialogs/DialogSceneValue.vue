@@ -75,7 +75,7 @@ export default {
     nodes: Array
   },
   watch: {
-    value (val) {
+    value (val) { // eslint-disable-line no-unused-vars
       this.$refs.form.resetValidation()
     }
   },
