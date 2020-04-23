@@ -150,11 +150,13 @@ export default {
       if (!v) return []
 
       // sensor binary
-      if (v.class_id == 0x30) // eslint-disable-line eqeqeq
-      { return ['battery', 'cold', 'connectivity', 'door', 'garage_door', 'gas', 'heat', 'light', 'lock', 'moisture', 'motion', 'moving', 'occupancy', 'opening', 'plug', 'power', 'presence', 'problem', 'safety', 'smoke', 'sound', 'vibration', 'window'] }
+      if (v.class_id == 0x30) { // eslint-disable-line eqeqeq
+        return ['battery', 'cold', 'connectivity', 'door', 'garage_door', 'gas', 'heat', 'light', 'lock', 'moisture', 'motion', 'moving', 'occupancy', 'opening', 'plug', 'power', 'presence', 'problem', 'safety', 'smoke', 'sound', 'vibration', 'window']
+      }
 
-      if (this.isSensor(v)) // sensor multilevel and meters
-      { return ['battery', 'humidity', 'illuminance', 'signal_strength', 'temperature', 'power', 'pressure', 'timestamp'] }
+      if (this.isSensor(v)) { // sensor multilevel and meters
+        return ['battery', 'humidity', 'illuminance', 'signal_strength', 'temperature', 'power', 'pressure', 'timestamp']
+      }
     },
     requiredIntensity () {
       return (
