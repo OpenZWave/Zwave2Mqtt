@@ -136,6 +136,7 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "lodash": "^4.17.15",
     "mocha": "^7.1.1",
     "node-notifier": "^5.4.3",
     "optimize-css-assets-webpack-plugin": "^3.2.1",
