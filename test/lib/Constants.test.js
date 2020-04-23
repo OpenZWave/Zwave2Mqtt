@@ -59,7 +59,16 @@ describe('#Constants', () => {
         _.range(32, 48).forEach(i => mod.meterType(i))
       })
       it('water', () => sensorType.should.always.have.been.calledWith(12))
-      after(() => sensorType.resetHistory())
     })
+  })
+  describe('#alarmType()', () => {
+    let map
+    before(() => {
+      map = mod._alarmMap
+      mod._alarmMap = { 1: 'foo' }
+    })
+    after(() => { mod._alarmMap = map })
+    it('known', () =>mod.alarmType(1).should.equal('foo'))
+    it('unknown', () =>mod.alarmType(3).should.equal('unknown_3'))
   })
 })
