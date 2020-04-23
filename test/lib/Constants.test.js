@@ -94,4 +94,14 @@ describe('#Constants', () => {
       props: {}
     }))
   })
+  describe('#commandClass()', () => {
+    let map
+    before(() => {
+      map = mod._commandClassMap
+      mod._commandClassMap = { 1: 'foo' }
+    })
+    after(() => { mod._commandClassMap = map })
+    it('known', () => mod.commandClass(1).should.equal('foo'))
+    it('unknown', () => mod.commandClass(3).should.equal('unknownClass_3'))
+  })
 })
