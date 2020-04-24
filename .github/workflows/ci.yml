@@ -25,10 +25,9 @@ jobs:
         cd open-zwave
         sudo make install
         sudo ldconfig /usr/local/lib /usr/local/lib64
+
     - name: Checkout Zwave2Mqtt
       uses: actions/checkout@v2
-      with:
-        path: Zwave2Mqtt
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -37,7 +36,6 @@ jobs:
 
     - name: Install - Build - Lint - Test
       run: |
-        cd Zwave2Mqtt
         npm install
         npm run lint
         npm run build
