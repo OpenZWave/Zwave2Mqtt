@@ -72,7 +72,7 @@ After a [discussion](https://github.com/OpenZWave/Zwave2Mqtt/issues/201) with Op
     - [Scenes](#scenes)
     - [Mesh](#mesh)
     - [Debug](#debug)
-  - [Healt check endpoints](#healt-check-endpoints)
+  - [Health check endpoints](#health-check-endpoints)
   - [:question: FAQ](#question-faq)
   - [:pray: Thanks](#pray-thanks)
   - [:pencil: TODOs](#pencil-todos)
