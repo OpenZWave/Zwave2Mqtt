@@ -28,7 +28,6 @@ jobs:
     - name: Checkout Zwave2Mqtt
       uses: actions/checkout@v2
       with:
-        repository: OpenZWave/Zwave2Mqtt
         path: Zwave2Mqtt
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
