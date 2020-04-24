@@ -19,10 +19,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: OpenZWave/open-zwave
-        path: open-zwave
+        path: /tmp/open-zwave
     - name: Install Openzwave
       run: |
-        cd open-zwave
+        cd /tmp/open-zwave
         sudo make install
         sudo ldconfig /usr/local/lib /usr/local/lib64
 
