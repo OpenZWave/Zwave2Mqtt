@@ -53,5 +53,6 @@ jobs:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
+          flag-name: run-${{ matrix.node-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
