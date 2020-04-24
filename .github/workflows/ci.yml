@@ -34,14 +34,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install - Build - Lint
+    - name: Install - Build - Lint - Test
       run: |
-        cd Zwave2Mqtt
         npm install
         npm run lint
         npm run build
-    - name: Run Tests
-      run: |
         npm run test
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
