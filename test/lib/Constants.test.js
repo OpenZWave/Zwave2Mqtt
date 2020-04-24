@@ -68,7 +68,30 @@ describe('#Constants', () => {
       mod._alarmMap = { 1: 'foo' }
     })
     after(() => { mod._alarmMap = map })
-    it('known', () =>mod.alarmType(1).should.equal('foo'))
-    it('unknown', () =>mod.alarmType(3).should.equal('unknown_3'))
+    it('known', () => mod.alarmType(1).should.equal('foo'))
+    it('unknown', () => mod.alarmType(3).should.equal('unknown_3'))
+  })
+  describe('#sensorType()', () => {
+    let map
+    before(() => {
+      map = mod._sensorMap
+      mod._sensorMap = { foo: {1: 'bar', props: {a: 'b', c: 'd'}}, bar: {2: 'foo'} }
+    })
+    after(() => { mod._sensorMap = map })
+    it('known', () => mod.sensorType(1).should.deep.equal({
+      sensor: 'foo',
+      objectId: 'bar',
+      props: {a: 'b', c: 'd'}
+    }))
+    it('no props', () => mod.sensorType(2).should.deep.equal({
+      sensor: 'bar',
+      objectId: 'foo',
+      props: {}
+    }))
+    it('unknown', () => mod.sensorType(3).should.deep.equal({
+      sensor: 'generic',
+      objectId: 'unknown_3',
+      props: {}
+    }))
   })
 })
