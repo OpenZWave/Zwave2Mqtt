@@ -44,13 +44,13 @@ jobs:
         npm run test
 
     - name: Generate coverage report
-      if: matrix['node-version'] == "12.x"
+      if: matrix['node-version'] == '12.x'
       run: |
         npm run coverage
         npm run record-coverage
 
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
-      if: matrix['node-version'] == "12.x"
+      if: matrix['node-version'] == '12.x'
       with:
         github-token: ${{ secrets.github_token }}
