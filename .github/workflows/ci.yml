@@ -49,7 +49,7 @@ jobs:
         npm run coverage
         npm run record-coverage
 
-    - name: Coveralls Parallel
+    - name: Coveralls
       uses: coverallsapp/github-action@master
       if: matrix['node-version'] == '12.x'
       with:
