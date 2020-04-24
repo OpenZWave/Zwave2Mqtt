@@ -757,7 +757,7 @@ All nodes with command class `thermostat_setpoint` and value `heating` will be s
 
 ![Debug](docs/debug.png)
 
-## Healt check endpoints
+## Health check endpoints
 
 `/health`: Returns `200` if both mqtt and zwave client are connected, `500` otherwise
 `/health/mqtt`: Returns `200` if mqtt client is connected, `500` otherwise
