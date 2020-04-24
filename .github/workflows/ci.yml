@@ -22,11 +22,10 @@ jobs:
         path: open-zwave
     - name: Install Openzwave
       run: |
-        cd open-zwave
+        mv open-zwave /tmp
+        cd /tmp/open-zwave
         sudo make install
         sudo ldconfig /usr/local/lib /usr/local/lib64
-        cd ..
-        rm -rf open-zwave
 
     - name: Checkout Zwave2Mqtt
       uses: actions/checkout@v2
