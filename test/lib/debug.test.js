@@ -1,21 +1,33 @@
 const chai = require('chai')
+const rewire = require('rewire')
 chai.should()
-let mod
 
 describe('#debug', () => {
-  describe('unset process.env.DEBUG', () => {
-    before(() => { mod = require('../../lib/debug') })
-    it('NO IDEA WHAT DIFFERENCE DETECTABLY MAKES?', () =>
-      mod('foo').namespace.should.equal('z2m:foo')
-    )
-  })
+  let mod = rewire('../../lib/debug')
+  let fun = mod.__get__('init')
+
+  it('returns debug extend', () =>
+    mod('foo').namespace.should.equal('z2m:foo')
+  )
+
   describe('set process.env.DEBUG', () => {
     before(() => {
-      process.env.DEBUG = 'f'
-      mod = require('../../lib/debug')
+      mod.__get__('log').disable()
+      process.env.DEBUG = 'ff'
+      fun()
     })
-    it('NO IDEA WHAT DIFFERENCE DETECTABLY MAKES?', () =>
-      mod('foo').namespace.should.equal('z2m:foo')
+    it('should disable logging', () =>
+      mod.__get__('log').enabled('z2m:aa').should.be.false
     )
+  })
+  describe('unset process.env.DEBUG', () => {
+    before(() => {
+      mod.__get__('log').disable()
+      delete process.env.DEBUG
+      fun()
+    })
+    it('should enable logging', () => {
+      return mod.__get__('log').enabled('z2m:aa').should.be.true
+    })
   })
 })
