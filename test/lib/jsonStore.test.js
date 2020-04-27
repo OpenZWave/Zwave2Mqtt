@@ -58,5 +58,22 @@ describe('#jsonStore', () => {
         should.Throw(() => mod.get({file: 'unknown'}), 'Requested file not present in store: unknown')
       )
     })
+
+    describe('#put()', () => {
+      beforeEach(() => {
+        sinon.stub(mod.__get__('jsonfile'), 'writeFile')
+      })
+      afterEach(() => {
+        mod.__get__('jsonfile').writeFile.restore()
+      })
+      it('ok', () => {
+        mod.__get__('jsonfile').writeFile.callsArgWith(2, null)
+        return mod.put({file: 'foo'}, 'bardata').should.eventually.equal('bardata')
+      })
+      it('error', () => {
+        mod.__get__('jsonfile').writeFile.callsArgWith(2, new Error('bar'))
+        mod.put({file: 'foo'}).should.be.rejectedWith('bar')
+      })
+    })
   })
 })
