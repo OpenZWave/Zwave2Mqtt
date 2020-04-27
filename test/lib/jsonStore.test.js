@@ -1,7 +1,6 @@
 const chai = require('chai')
 const sinon = require('sinon')
 const rewire = require('rewire')
-const _ = require('lodash')
 
 chai.use(require('chai-as-promised'))
 chai.use(require('sinon-chai'))
@@ -40,6 +39,24 @@ describe('#jsonStore', () => {
     it('file not found, return default', () => {
       mod.__get__('jsonfile').readFile.callsArgWith(1, {code: 'ENOENT'}, null)
       return fun(config).should.eventually.deep.equal({ file: 'foo', data: 'defaultbar' })
+    })
+  })
+
+  describe('#StorageHelper', () => {
+    let StorageHelper = mod.__get__('StorageHelper')
+    it('class test', () => {
+      let ins = new StorageHelper()
+      ins.store.should.deep.equal({})
+    })
+
+    describe('#get()', () => {
+      mod.store.known = 'foo'
+      it('known', () =>
+        mod.get({file: 'known'}).should.equal('foo')
+      )
+      it('unknown', () =>
+        should.Throw(() => mod.get({file: 'unknown'}), 'Requested file not present in store: unknown')
+      )
     })
   })
 })
