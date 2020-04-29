@@ -49,8 +49,29 @@ describe('#jsonStore', () => {
       ins.store.should.deep.equal({})
     })
 
+    describe('#init()', () => {
+      let getFile
+      beforeEach(() => {
+        mod.store = {known: 'no', foobar: 'foo'}
+        getFile = mod.__get__('getFile')
+        mod.__set__('getFile', sinon.stub().resolves({file: 'foo', data: 'bar'}))
+      })
+      afterEach(() => {
+        mod.__set__('getFile', getFile)
+      })
+      it('ok', () =>
+        mod.init({file: 'foobar'}).should.eventually.deep.equal({known: 'no', foobar: 'foo', foo: 'bar'})
+      )
+      it('error', () => {
+        mod.__set__('getFile', sinon.stub().rejects('fo'))
+        return mod.init({file: 'foobar'}).should.eventually.be.rejected
+      })
+    })
+
     describe('#get()', () => {
-      mod.store.known = 'foo'
+      beforeEach(() => {
+        mod.store = {known: 'foo'}
+      })
       it('known', () =>
         mod.get({file: 'known'}).should.equal('foo')
       )
