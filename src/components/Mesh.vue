@@ -42,34 +42,34 @@
           dense
           style="min-width:300px;background:transparent"
         >
-          <v-list-tile>
-            <v-list-tile-content>ID</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.node_id }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Status</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.status }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Type</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.type }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Product</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.product }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Manufacturer</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.manufacturer }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Name</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.name }}</v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>Location</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ selectedNode.data.loc }}</v-list-tile-content>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-content>ID</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.node_id }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Status</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.status }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Type</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.type }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Product</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.product }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Manufacturer</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.manufacturer }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Name</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.name }}</v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>Location</v-list-item-content>
+            <v-list-item-content class="align-end">{{ selectedNode.data.loc }}</v-list-item-content>
+          </v-list-item>
         </v-list>
       </div>
 

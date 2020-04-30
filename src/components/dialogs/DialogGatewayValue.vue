@@ -37,13 +37,13 @@
                   >{{ data.item.label + (data.item.instance > 1 ? " - Instance " + data.item.instance : "") }}</template>
                   <template slot="item" slot-scope="data">
                     <template>
-                      <v-list-tile-content>
-                        <v-list-tile-title>{{ data.item.label + (data.item.instance > 1 ? " - Instance " + data.item.instance : "") }}</v-list-tile-title>
-                        <v-list-tile-sub-title
+                      <v-list-item-content>
+                        <v-list-item-title>{{ data.item.label + (data.item.instance > 1 ? " - Instance " + data.item.instance : "") }}</v-list-item-title>
+                        <v-list-item-subtitle
                           style="max-width:500px"
                           class="text-truncate text-no-wrap"
-                        >{{ data.item.help }}</v-list-tile-sub-title>
-                      </v-list-tile-content>
+                        >{{ data.item.help }}</v-list-item-subtitle>
+                      </v-list-item-content>
                     </template>
                   </template>
                 </v-select>

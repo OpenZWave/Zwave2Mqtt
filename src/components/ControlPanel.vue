@@ -33,13 +33,17 @@
             <v-flex xs12 sm6 md3 align-self-center>
               <v-btn icon @click.native="importConfiguration">
                 <v-tooltip bottom>
-                  <v-icon dark color="primary" slot="activator">file_upload</v-icon>
+                  <template v-slot:activator="{ on }">
+                  <v-icon dark color="primary" v-on="on">file_upload</v-icon>
+                  </template>
                   <span>Import nodes.json Configuration</span>
                 </v-tooltip>
               </v-btn>
               <v-btn icon @click.native="exportConfiguration">
                 <v-tooltip bottom>
-                  <v-icon dark color="primary" slot="activator">file_download</v-icon>
+                  <template v-slot:activator="{ on }">
+                  <v-icon dark color="primary" v-on="on">file_download</v-icon>
+                  </template>
                   <span>Export nodes.json Configuration</span>
                 </v-tooltip>
               </v-btn>
@@ -56,7 +60,7 @@
         <v-data-table
           :headers="headers"
           :items="tableNodes"
-          :rows-per-page-items="[10, 20, {'text':'All','value':-1}]"
+          :items-per-page-options="[10, 20, {'text':'All','value':-1}]"
           item-key="node_id"
           class="elevation-1"
         >

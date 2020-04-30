@@ -386,7 +386,7 @@
                     <v-data-table
                       :headers="headers"
                       :items="gateway.values"
-                      :rows-per-page-items="[10, 20, {'text':'All','value':-1}]"
+                      :items-per-page-options="[10, 20, {'text':'All','value':-1}]"
                       class="elevation-1"
                     >
                       <template slot="items" slot-scope="props">
