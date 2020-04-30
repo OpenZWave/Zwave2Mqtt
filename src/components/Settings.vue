@@ -413,7 +413,7 @@
                     </v-data-table>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn color="blue darken-1" flat @click="dialogValue = true">New Value</v-btn>
+                    <v-btn color="blue darken-1" text @click="dialogValue = true">New Value</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-expansion-panel-content>
@@ -435,15 +435,15 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="purple darken-1" flat @click="importSettings">
+        <v-btn color="purple darken-1" text @click="importSettings">
           Import
           <v-icon right dark>file_upload</v-icon>
         </v-btn>
-        <v-btn color="green darken-1" flat @click="exportSettings">
+        <v-btn color="green darken-1" text @click="exportSettings">
           Export
           <v-icon right dark>file_download</v-icon>
         </v-btn>
-        <v-btn color="blue darken-1" flat type="submit" form="form_settings">
+        <v-btn color="blue darken-1" text type="submit" form="form_settings">
           Save
           <v-icon right dark>save</v-icon>
         </v-btn>

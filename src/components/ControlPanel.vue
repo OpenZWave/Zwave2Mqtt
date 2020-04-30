@@ -363,11 +363,11 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-btn flat @click.native="importScenes">
+                  <v-btn text @click.native="importScenes">
                     Import
                     <v-icon right dark color="primary">file_upload</v-icon>
                   </v-btn>
-                  <v-btn flat @click.native="exportScenes">
+                  <v-btn text @click.native="exportScenes">
                     Export
                     <v-icon right dark color="primary">file_download</v-icon>
                   </v-btn>
