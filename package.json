@@ -149,7 +149,7 @@
     "optimize-css-assets-webpack-plugin": "^3.2.1",
     "ora": "^1.2.0",
     "portfinder": "^1.0.25",
-    "postcss-import": "^11.0.0",
+    "postcss-import": "^12.0.1",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rewire": "^5.0.0",
