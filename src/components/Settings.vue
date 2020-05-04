@@ -460,7 +460,7 @@ import { mapGetters } from 'vuex'
 import ConfigApis from '@/apis/ConfigApis'
 import Confirm from '@/components/Confirm'
 import fileInput from '@/components/custom/file-input.vue'
-import url from 'native-url'
+import { parse } from 'native-url'
 
 import DialogGatewayValue from '@/components/dialogs/DialogGatewayValue'
 
@@ -474,7 +474,7 @@ export default {
   computed: {
     secure () {
       if (!this.mqtt.host) return false
-      const parsed = url.parse(this.mqtt.host)
+      const parsed = parse(this.mqtt.host)
 
       const secure =
         ['mqtts:', 'wss:', 'wxs:', 'alis:', 'tls:'].indexOf(parsed.protocol) >=
