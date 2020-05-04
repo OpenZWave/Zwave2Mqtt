@@ -110,16 +110,16 @@
               </v-layout>
 
               <v-layout row>
-                <v-flex xs2>
+                <v-flex>
                   <v-subheader>Device ID: {{selectedNode.device_id}}</v-subheader>
                 </v-flex>
               </v-layout>
 
               <v-layout row>
-                <v-flex xs2>
+                <v-flex xs4>
                   <v-subheader>Name: {{selectedNode.name}}</v-subheader>
                 </v-flex>
-                <v-flex xs4>
+                <v-flex xs8>
                   <v-text-field
                     label="New name"
                     append-outer-icon="send"
@@ -132,10 +132,10 @@
               </v-layout>
 
               <v-layout row>
-                <v-flex xs2>
+                <v-flex xs4>
                   <v-subheader>Location: {{selectedNode.loc}}</v-subheader>
                 </v-flex>
-                <v-flex xs4>
+                <v-flex xs8>
                   <v-text-field
                     label="New Location"
                     append-outer-icon="send"
