@@ -11,7 +11,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-      <v-divider></v-divider>
+      <v-divider style="margin-top:8px"></v-divider>
       <v-list>
         <v-list-item
           v-for="item in pages"
@@ -32,7 +32,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="toggleDrawer" />
       <v-toolbar-title>{{title}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
