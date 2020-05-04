@@ -466,7 +466,7 @@ import ConfigApis from '@/apis/ConfigApis'
 import ValueID from '@/components/ValueId'
 import Confirm from '@/components/Confirm'
 
-import { AnsiUp } from 'ansi_up'
+import AnsiUp from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
 
