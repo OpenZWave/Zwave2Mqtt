@@ -460,7 +460,7 @@ import { mapGetters } from 'vuex'
 import ConfigApis from '@/apis/ConfigApis'
 import Confirm from '@/components/Confirm'
 import fileInput from '@/components/custom/file-input.vue'
-import url from 'url'
+import url from 'native-url'
 
 import DialogGatewayValue from '@/components/dialogs/DialogGatewayValue'
 
@@ -595,8 +595,8 @@ export default {
       options = options || {}
 
       var levelMap = {
-        'warning': 'orange',
-        'alert': 'red'
+        warning: 'orange',
+        alert: 'red'
       }
 
       options.color = levelMap[level] || 'primary'

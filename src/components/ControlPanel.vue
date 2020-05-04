@@ -466,7 +466,7 @@ import ConfigApis from '@/apis/ConfigApis'
 import ValueID from '@/components/ValueId'
 import Confirm from '@/components/Confirm'
 
-import { default as AnsiUp } from 'ansi_up'
+import { AnsiUp } from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
 
@@ -742,8 +742,8 @@ export default {
       options = options || {}
 
       var levelMap = {
-        'warning': 'orange',
-        'alert': 'red'
+        warning: 'orange',
+        alert: 'red'
       }
 
       options.color = levelMap[level] || 'primary'
@@ -974,7 +974,7 @@ export default {
           var secure = await this.$refs.confirm.open('Node inclusion', 'Start inclusion in security mode?')
           args.push(secure)
         } else if (this.cnt_action === 'hardReset') {
-          var ok = await this.$refs.confirm.open('Hard Reset', 'Your controller will be reset to factory and all paired devices will be removed', {color: 'red'})
+          var ok = await this.$refs.confirm.open('Hard Reset', 'Your controller will be reset to factory and all paired devices will be removed', { color: 'red' })
           if (!ok) {
             return
           }

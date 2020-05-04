@@ -121,12 +121,8 @@
 </template>
 
 <script>
-import ValueID from '@/components/ValueId'
 
 export default {
-  components: {
-    ValueID
-  },
   props: {
     value: Boolean,
     gw_type: Number,
@@ -147,15 +143,15 @@ export default {
     deviceClasses () {
       var v = this.editedValue.value
 
-      if (!v) return []
-
       // sensor binary
-      if (v.class_id == 0x30) { // eslint-disable-line eqeqeq
+      if (!v) {
+        return []
+      } else if (v.class_id == 0x30) { // eslint-disable-line eqeqeq
         return ['battery', 'cold', 'connectivity', 'door', 'garage_door', 'gas', 'heat', 'light', 'lock', 'moisture', 'motion', 'moving', 'occupancy', 'opening', 'plug', 'power', 'presence', 'problem', 'safety', 'smoke', 'sound', 'vibration', 'window']
-      }
-
-      if (this.isSensor(v)) { // sensor multilevel and meters
+      } else if (this.isSensor(v)) { // sensor multilevel and meters
         return ['battery', 'humidity', 'illuminance', 'signal_strength', 'temperature', 'power', 'pressure', 'timestamp']
+      } else {
+        return []
       }
     },
     requiredIntensity () {
