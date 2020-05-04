@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="dark">
     <v-navigation-drawer clipped-left :mini-variant="mini" v-model="drawer" app>
         <v-list nav class="py-0">
           <v-list-item :class="mini && 'px-0'">
@@ -24,6 +24,9 @@
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="!mini">
+            <v-switch label="Dark theme" hide-details v-model="dark"></v-switch>
         </v-list-item>
       </v-list>
       <v-footer absolute v-if="!mini" class="pa-3">
@@ -189,12 +192,19 @@ export default {
       topbar: [],
       title: '',
       snackbar: false,
-      snackbarText: ''
+      snackbarText: '',
+      dark: false
     }
   },
   watch: {
     $route: function (value) {
       this.title = value.name || ''
+    },
+    dark (v) {
+      if (v) localStorage.setItem('dark', 'true')
+      else localStorage.removeItem('dark')
+
+      this.$vuetify.theme.dark = v
     }
   },
   beforeMount () {
@@ -224,6 +234,8 @@ export default {
     if (this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl) {
       this.toggleDrawer()
     }
+
+    this.dark = !!localStorage.getItem('dark')
   },
   beforeDestroy () {
     if (this.socket) this.socket.close()
