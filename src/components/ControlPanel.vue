@@ -66,9 +66,8 @@
         >
           <template v-slot:item="{ item }">
             <tr
-              style="cursor:pointer;"
-              :active="selectedNode == item"
-              @click="selectedNode == item ? selectedNode = null : selectedNode = item"
+              :style="{cursor:'pointer', background: selectedNode === item ? '#eee' : 'none'}"
+              @click.stop="selectedNode == item ? selectedNode = null : selectedNode = item"
             >
               <td>{{ item.node_id }}</td>
               <td>{{ item.type }}</td>
@@ -1057,22 +1056,26 @@ export default {
       }
     },
     updateValue (v) {
-      if (v.type === 'bitset') {
-        v.newValue = ['0', '0', '0', '0', '0', '0', '0', '0']
-        for (const bit in v.bitSetIds) { v.newValue[8 - parseInt(bit)] = v.bitSetIds[bit].value ? '1' : '0' }
+      v = this.selectedNode && this.selectedNode.values ? this.selectedNode.values.find(i => i.value_id === v.value_id) : null
 
-        v.newValue = parseInt(v.newValue.join(''), 2)
+      if (v) {
+        if (v.type === 'bitset') {
+          v.newValue = ['0', '0', '0', '0', '0', '0', '0', '0']
+          for (const bit in v.bitSetIds) { v.newValue[8 - parseInt(bit)] = v.bitSetIds[bit].value ? '1' : '0' }
+
+          v.newValue = parseInt(v.newValue.join(''), 2)
+        }
+
+        v.toUpdate = true
+
+        this.apiRequest('setValue', [
+          v.node_id,
+          v.class_id,
+          v.instance,
+          v.index,
+          v.type === 'button' ? true : v.newValue
+        ])
       }
-
-      v.toUpdate = true
-
-      this.apiRequest('setValue', [
-        v.node_id,
-        v.class_id,
-        v.instance,
-        v.index,
-        v.type === 'button' ? true : v.newValue
-      ])
     },
     jsonToList (obj) {
       var s = ''
