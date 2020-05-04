@@ -390,26 +390,28 @@
                       :items-per-page-options="[10, 20, {'text':'All','value':-1}]"
                       class="elevation-1"
                     >
-                      <template slot="items" slot-scope="props">
-                        <td>{{ deviceName(props.item.device) }}</td>
-                        <td>{{ props.item.value.label + ' (' + props.item.value.value_id + ')' }}</td>
-                        <td class="text-xs">{{ props.item.topic }}</td>
-                        <td class="text-xs">{{ props.item.postOperation || 'No operation' }}</td>
-                        <td
-                          class="text-xs"
-                        >{{ props.item.enablePoll ? ("Intensity " + props.item.pollIntensity) : 'No' }}</td>
-                        <td
-                          class="text-xs"
-                        >{{ props.item.verifyChanges ? "Verified" : 'Not Verified' }}</td>
-                        <td class="justify-center layout px-0">
-                          <v-icon
-                            small
-                            class="mr-2"
-                            color="green"
-                            @click="editItem(props.item)"
-                          >edit</v-icon>
-                          <v-icon small color="red" @click="deleteItem(props.item)">delete</v-icon>
-                        </td>
+                      <template v-slot:item="{ item }">
+                        <tr>
+                          <td>{{ deviceName(item.device) }}</td>
+                          <td>{{ item.value.label + ' (' + item.value.value_id + ')' }}</td>
+                          <td class="text-xs">{{ item.topic }}</td>
+                          <td class="text-xs">{{ item.postOperation || 'No operation' }}</td>
+                          <td
+                            class="text-xs"
+                          >{{ item.enablePoll ? ("Intensity " + item.pollIntensity) : 'No' }}</td>
+                          <td
+                            class="text-xs"
+                          >{{ item.verifyChanges ? "Verified" : 'Not Verified' }}</td>
+                          <td class="justify-center layout px-0">
+                            <v-icon
+                              small
+                              class="mr-2"
+                              color="green"
+                              @click="editItem(item)"
+                            >edit</v-icon>
+                            <v-icon small color="red" @click="deleteItem(item)">delete</v-icon>
+                          </td>
+                        </tr>
                       </template>
                     </v-data-table>
                   </v-card-text>
@@ -662,7 +664,7 @@ export default {
     },
     saveValue () {
       if (this.editedIndex > -1) {
-        Object.assign(this.gateway.values[this.editedIndex], this.editedValue)
+        this.$set(this.gateway.values, this.editedIndex, this.editedValue)
       } else {
         this.gateway.values.push(this.editedValue)
       }

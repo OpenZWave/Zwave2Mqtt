@@ -74,10 +74,12 @@
       </div>
 
       <v-speed-dial bottom fab right fixed v-model="fab">
-        <v-btn slot="activator" color="blue darken-2" dark fab hover v-model="fab">
-          <v-icon>add</v-icon>
-          <v-icon>close</v-icon>
+        <template v-slot:activator>
+          <v-btn color="blue darken-2" dark fab hover v-model="fab">
+          <v-icon v-if="fab">close</v-icon>
+          <v-icon v-else>add</v-icon>
         </v-btn>
+        </template>
         <v-btn fab dark small color="green" @click="refresh">
           <v-icon>refresh</v-icon>
         </v-btn>

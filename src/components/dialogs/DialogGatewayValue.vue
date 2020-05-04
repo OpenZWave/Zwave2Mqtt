@@ -31,20 +31,17 @@
                   item-value="value_id"
                   :items="deviceValues"
                 >
-                  <template
-                    slot="selection"
-                    slot-scope="data"
-                  >{{ data.item.label + (data.item.instance > 1 ? " - Instance " + data.item.instance : "") }}</template>
-                  <template slot="item" slot-scope="data">
-                    <template>
+                  <template v-slot:selection="{ item }">
+                  {{ item.label + (item.instance > 1 ? " - Instance " + item.instance : "") }}
+                  </template>
+                  <template v-slot:item="{ item }">
                       <v-list-item-content>
-                        <v-list-item-title>{{ data.item.label + (data.item.instance > 1 ? " - Instance " + data.item.instance : "") }}</v-list-item-title>
+                        <v-list-item-title>{{ item.label + (item.instance > 1 ? " - Instance " + item.instance : "") }}</v-list-item-title>
                         <v-list-item-subtitle
                           style="max-width:500px"
                           class="text-truncate text-no-wrap"
-                        >{{ data.item.help }}</v-list-item-subtitle>
+                        >{{ item.help }}</v-list-item-subtitle>
                       </v-list-item-content>
-                    </template>
                   </template>
                 </v-select>
               </v-flex>
@@ -113,8 +110,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" flat @click="$emit('close')">Cancel</v-btn>
-        <v-btn color="blue darken-1" flat @click="$refs.form.validate() && $emit('save')">Save</v-btn>
+        <v-btn color="blue darken-1" text @click="$emit('close')">Cancel</v-btn>
+        <v-btn color="blue darken-1" text @click="$refs.form.validate() && $emit('save')">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -132,7 +129,7 @@ export default {
   },
   watch: {
     value (val) { // eslint-disable-line no-unused-vars
-      this.$refs.form.resetValidation()
+      this.$refs.form && this.$refs.form.resetValidation()
     }
   },
   computed: {
