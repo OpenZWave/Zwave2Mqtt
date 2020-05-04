@@ -10,10 +10,12 @@
           v-model="valid_zwave"
           ref="form_settings"
         >
-          <v-expansion-panel class="elevation-0">
+
+        <v-expansion-panels accordion multiple>
+          <v-expansion-panel key="zwave">
+            <v-expansion-panel-header>Zwave</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <div slot="header">Zwave</div>
-              <v-card>
+              <v-card flat>
                 <v-card-text>
                   <v-layout wrap>
                     <v-flex xs12 sm6>
@@ -135,20 +137,19 @@
 
           <v-divider></v-divider>
 
-          <v-flex xs12 sm6>
+          <v-container xs12 sm6>
             <v-switch
               hint="Enable this to use Z2M only as Control Panel"
               persistent-hint
               label="Disable Gateway"
               v-model="mqtt.disabled"
             ></v-switch>
-          </v-flex>
+          </v-container>
 
-          <div v-if="!mqtt.disabled">
-            <v-expansion-panel class="elevation-0">
+            <v-expansion-panel key="mqtt"  v-if="!mqtt.disabled">
+              <v-expansion-panel-header>Mqtt</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <div slot="header">Mqtt</div>
-                <v-card>
+                <v-card flat>
                   <v-card-text>
                     <v-layout wrap>
                       <v-flex xs12 sm6 md4>
@@ -298,10 +299,10 @@
 
             <v-divider></v-divider>
 
-            <v-expansion-panel class="elevation-0">
+            <v-expansion-panel key="gateway" v-if="!mqtt.disabled">
+              <v-expansion-panel-header>Gateway</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <div slot="header">Gateway</div>
-                <v-card>
+                <v-card flat>
                   <v-card-text>
                     <v-layout wrap>
                       <v-flex xs12>
@@ -420,7 +421,8 @@
             </v-expansion-panel>
 
             <v-divider></v-divider>
-          </div>
+
+          </v-expansion-panels>
 
           <DialogGatewayValue
             @save="saveValue"
