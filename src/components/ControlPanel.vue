@@ -67,7 +67,7 @@
           <template v-slot:item="{ item }">
             <tr
               :style="{cursor:'pointer', background: selectedNode === item ? '#eee' : 'none'}"
-              @click.stop="selectedNode == item ? selectedNode = null : selectedNode = item"
+              @click.stop="selectedNode == item ? selectedNode = null : selectedNode = nodes.find(n.node_id === item.node_id)"
             >
               <td>{{ item.node_id }}</td>
               <td>{{ item.type }}</td>
@@ -159,10 +159,10 @@
                             :key="index"
                             xs12
                           >
-                            <!-- eslint-disable vue/valid-v-model --><ValueID
+                            <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[selectedNode.values.indexOf(v)]"
-                            ></ValueID><!-- eslint-enable -->
+                              v-model="selectedNode.values[index]"
+                            ></ValueID>
                           </v-flex>
                         </v-card-text>
                       </v-card>
@@ -189,10 +189,10 @@
                             :key="index"
                             xs12
                           >
-                            <!-- eslint-disable vue/valid-v-model --><ValueID
+                            <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[selectedNode.values.indexOf(v)]"
-                            ></ValueID><!-- eslint-enable -->
+                              v-model="selectedNode.values[index]"
+                            ></ValueID>
                           </v-flex>
                         </v-card-text>
                       </v-card>
@@ -212,10 +212,10 @@
                             :key="index"
                             xs12
                           >
-                            <!-- eslint-disable vue/valid-v-model --><ValueID
+                            <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[selectedNode.values.indexOf(v)]"
-                            ></ValueID><!-- eslint-enable -->
+                              v-model="selectedNode.values[index]"
+                            ></ValueID>
                           </v-flex>
                         </v-card-text>
                       </v-card>
