@@ -148,7 +148,7 @@
     "nodemon": "^2.0.3",
     "optimize-css-assets-webpack-plugin": "^3.2.1",
     "ora": "^1.2.0",
-    "portfinder": "^1.0.25",
+    "portfinder": "^1.0.26",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
