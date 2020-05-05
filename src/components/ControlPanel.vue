@@ -760,7 +760,7 @@ export default {
       if (!item) return
 
       if (this.selectedNode === item) {
-        this.selectNode = null
+        this.selectedNode = null
       } else {
         this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
       }
