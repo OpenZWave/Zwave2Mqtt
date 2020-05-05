@@ -155,13 +155,13 @@
                       <v-card flat>
                         <v-card-text>
                           <v-flex
-                            v-for="(v, index) in selectedNode.values.filter(v => v.genre == 'user')"
+                            v-for="(v, index) in userValues"
                             :key="index"
                             xs12
                           >
                             <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[index]"
+                              v-model="userValues[index]"
                             ></ValueID>
                           </v-flex>
                         </v-card-text>
@@ -185,13 +185,13 @@
                       <v-card flat>
                         <v-card-text>
                           <v-flex
-                            v-for="(v, index) in selectedNode.values.filter(v => v.genre == 'config')"
+                            v-for="(v, index) in configValues"
                             :key="index"
                             xs12
                           >
                             <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[index]"
+                              v-model="configValues[index]"
                             ></ValueID>
                           </v-flex>
                         </v-card-text>
@@ -208,13 +208,13 @@
                       <v-card flat>
                         <v-card-text>
                           <v-flex
-                            v-for="(v, index) in selectedNode.values.filter(v => v.genre == 'system')"
+                            v-for="(v, index) in systemValues"
                             :key="index"
                             xs12
                           >
                             <ValueID
                               @updateValue="updateValue"
-                              v-model="selectedNode.values[index]"
+                              v-model="systemValues[index]"
                             ></ValueID>
                           </v-flex>
                         </v-card-text>
@@ -519,6 +519,15 @@ export default {
       }
 
       return devices
+    },
+    userValues () {
+      return this.selectedNode ? this.selectedNode.values.filter(v => v.genre === 'user') : []
+    },
+    systemValues () {
+      return this.selectedNode ? this.selectedNode.values.filter(v => v.genre === 'system') : []
+    },
+    configValues () {
+      return this.selectedNode ? this.selectedNode.values.filter(v => v.genre === 'config') : []
     }
   },
   watch: {
