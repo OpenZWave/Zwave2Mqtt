@@ -67,7 +67,7 @@
           <template v-slot:item="{ item }">
             <tr
               :style="{cursor:'pointer', background: selectedNode === item ? '#eee' : 'none'}"
-              @click.stop="selectedNode == item ? selectedNode = null : selectedNode = nodes.find(n.node_id === item.node_id)"
+              @click.stop="selectNode(item)"
             >
               <td>{{ item.node_id }}</td>
               <td>{{ item.type }}</td>
@@ -746,6 +746,15 @@ export default {
   methods: {
     showSnackbar (text) {
       this.$emit('showSnackbar', text)
+    },
+    selectNode (item) {
+      if (!item) return
+
+      if (this.selectedNode === item) {
+        this.selectNode = null
+      } else {
+        this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
+      }
     },
     async confirm (title, text, level, options) {
       options = options || {}
