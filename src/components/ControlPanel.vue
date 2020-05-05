@@ -81,7 +81,7 @@
           </template>
         </v-data-table>
 
-        <v-tabs v-model="currentTab" fixed-tabs>
+        <v-tabs style="margin-top:10px" v-model="currentTab" fixed-tabs>
 
           <v-tab key="node">Node</v-tab>
           <v-tab key="groups">Groups</v-tab>
@@ -89,7 +89,7 @@
           <v-tab key="debug">Debug</v-tab>
 
           <!-- TABS -->
-          <v-tabs-items class="elevation-1" v-model="currentTab">
+          <v-tabs-items v-model="currentTab">
             <!-- TAB NODE INFO -->
             <v-tab-item key="node">
               <v-container v-if="selectedNode" grid-list-md>
@@ -765,6 +765,15 @@ export default {
         this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
       }
     },
+    getValue (v) {
+      var node = this.nodes[v.node_id]
+
+      if (node && node.values) {
+        return node.values.find(i => i.value_id === v.value_id)
+      } else {
+        return null
+      }
+    },
     async confirm (title, text, level, options) {
       options = options || {}
 
@@ -1074,16 +1083,20 @@ export default {
       }
     },
     updateValue (v) {
-      v = this.selectedNode && this.selectedNode.values ? this.selectedNode.values.find(i => i.value_id === v.value_id) : null
+      v = this.getValue(v)
 
       if (v) {
         if (v.type === 'bitset') {
           v.newValue = ['0', '0', '0', '0', '0', '0', '0', '0']
-          for (const bit in v.bitSetIds) { v.newValue[8 - parseInt(bit)] = v.bitSetIds[bit].value ? '1' : '0' }
+
+          for (const bit in v.bitSetIds) {
+            v.newValue[8 - parseInt(bit)] = v.bitSetIds[bit].value ? '1' : '0'
+          }
 
           v.newValue = parseInt(v.newValue.join(''), 2)
         }
 
+        // in this way I can check when the value receives an update
         v.toUpdate = true
 
         this.apiRequest('setValue', [
@@ -1181,19 +1194,15 @@ export default {
     })
 
     this.socket.on(this.socketEvents.valueUpdated, data => {
-      var node = self.nodes[data.node_id]
-      if (node && node.values) {
-        var index = node.values.findIndex(v => v.value_id === data.value_id)
-        if (index >= 0) {
-          if (self.nodes[data.node_id].values[index].toUpdate) {
-            self.nodes[data.node_id].values[index].toUpdate = false
-            self.showSnackbar('Value updated')
-          }
+      var valueId = self.getValue(data)
 
-          if (!data.newValue) data.newValue = data.value
-
-          self.$set(self.nodes[data.node_id].values, index, data)
+      if (valueId) {
+        // this value is waiting for an update
+        if (valueId.toUpdate) {
+          valueId.toUpdate = false
+          self.showSnackbar('Value updated')
         }
+        valueId.newValue = data.value
       }
     })
 
