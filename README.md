@@ -9,6 +9,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/OpenZWave/Zwave2Mqtt/badge.svg?targetFile=package.json)](https://snyk.io/test/github/OpenZWave/Zwave2Mqtt?targetFile=package.json)
 [![Dependencies Status](https://david-dm.org/OpenZWave/Zwave2Mqtt/status.svg)](https://david-dm.org/OpenZWave/Zwave2Mqtt)
 [![devDependencies Status](https://david-dm.org/OpenZWave/Zwave2Mqtt/dev-status.svg)](https://david-dm.org/OpenZWave/Zwave2Mqtt?type=dev)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/OpenZWave/Zwave2Mqtt.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/OpenZWave/Zwave2Mqtt/alerts/)
 
 [![Join channel](https://img.shields.io/badge/SLACK-zwave2mqtt.slack.com-red.svg?style=popout&logo=slack&logoColor=red)](https://join.slack.com/t/zwave2mqtt/shared_invite/enQtNjc4NjgyNjc3NDI2LTc3OGQzYmJlZDIzZTJhMzUzZWQ3M2Q3NThmMjY5MGY1MTc4NjFiOWZhZWE5YjNmNGE0OWRjZjJiMjliZGQyYmU "Join channel")
 
