@@ -34,7 +34,7 @@ jobs:
         if: ${{ github.ref == 'git/refs/heads/master'}}
         run: |
           docker buildx build \
-          --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t ${GITHUB_REPOSITORY}:latest \
           --push \
           .
@@ -43,7 +43,7 @@ jobs:
         if: ${{ github.event_name == 'release' }}
         run: |
           docker buildx build \
-          --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t ${GITHUB_REPOSITORY}:latest \
           --push \
           .
@@ -52,7 +52,7 @@ jobs:
         if: ${{ github.event_name == 'release' }}
         run: |
           docker buildx build \
-          --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t ${GITHUB_REPOSITORY}:$(echo ${GITHUB_REF} | sed "s/git\/refs\/tags\///") \
           --push \
           .
