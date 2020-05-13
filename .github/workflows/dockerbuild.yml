@@ -30,8 +30,17 @@ jobs:
       - uses: crazy-max/ghaction-docker-buildx@v1
         if: ${{ github.event_name != 'pull_request' }}
 
-      - name: Latest
+      - name: Dev
         if: ${{ github.ref == 'git/refs/heads/master'}}
+        run: |
+          docker buildx build \
+          --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+          -t ${GITHUB_REPOSITORY}:latest \
+          --push \
+          .
+
+      - name: Latest
+        if: ${{ github.event_name == 'release' }}
         run: |
           docker buildx build \
           --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
