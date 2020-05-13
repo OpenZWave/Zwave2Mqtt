@@ -111,7 +111,7 @@
     "vue-d3-network": "^0.1.28",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.28",
-    "vuex": "^3.3.0"
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -127,7 +127,7 @@
     "@babel/plugin-syntax-jsx": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
-    "@mdi/font": "^5.1.45",
+    "@mdi/font": "^5.2.45",
     "autoprefixer": "^9.7.6",
     "babel-eslint": "^10.1.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
