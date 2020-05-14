@@ -39,20 +39,12 @@ jobs:
           --push \
           .
 
-      - name: Latest
-        if: ${{ github.event_name == 'release' }}
-        run: |
-          docker buildx build \
-          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
-          -t ${GITHUB_REPOSITORY}:latest \
-          --push \
-          .
-
-      - name: Tag
+      - name: Latest & tag
         if: ${{ github.event_name == 'release' }}
         run: |
           docker buildx build \
           --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t ${GITHUB_REPOSITORY}:$(echo ${GITHUB_REF} | sed "s/git\/refs\/tags\/v//") \
+          -t ${GITHUB_REPOSITORY}:latest \
           --push \
           .
