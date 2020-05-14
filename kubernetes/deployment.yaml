@@ -46,6 +46,8 @@ spec:
               name: zwavestick
             - mountPath: /usr/src/app/store
               name: data
+          # - mountPath: /usr/local/etc/openzwave
+          #   name: ozwdatabase
           # - mountPath: /usr/src/app/store/settings.json <-- if putting your settings.json in a secret
           #   name: config
           #   readOnly: true
@@ -64,3 +66,6 @@ spec:
         - name: data
           hostPath:
             path: /zwave/data
+        # - name: ozwdatabase
+        #   hostPath:
+        #     path: /zwave/database
