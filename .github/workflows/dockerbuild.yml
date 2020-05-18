@@ -18,8 +18,7 @@ jobs:
       - name: Just build on PR
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          cd docker
-          docker build ../
+          docker build -f docker/Dockerfile .
 
       - name: Login to dockerhub
         if: ${{ github.event_name != 'pull_request' }}
@@ -35,20 +34,20 @@ jobs:
       - name: Dev
         if: ${{ github.ref == 'refs/heads/master'}}
         run: |
-          cd docker
           docker buildx build \
+          -f docker/Dockerfile \
           --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:latest \
           --push \
-          ../
+          .
 
       - name: Latest & tag
         if: ${{ github.event_name == 'release' }}
         run: |
-          cd docker
           docker buildx build \
+          -f docker/Dockerfile \
           --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:$(echo ${GITHUB_REF} | sed "s/git\/refs\/tags\/v//") \
           -t robertslando/zwave2mqtt:latest \
           --push \
-          ../
+          .
