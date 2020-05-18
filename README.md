@@ -38,7 +38,6 @@ After a [discussion](https://github.com/OpenZWave/Zwave2Mqtt/issues/201) with Op
   - [📖 Table of contents](#%f0%9f%93%96-table-of-contents)
   - [:electric_plug: Installation](#electricplug-installation)
     - [DOCKER :tada: way](#docker-tada-way)
-      - [Auto Update OZW device database](#auto-update-ozw-device-database)
     - [Kubernetes way](#kubernetes-way)
     - [NodeJS or PKG version](#nodejs-or-pkg-version)
   - [:nerd_face: Development](#nerdface-development)
@@ -103,30 +102,8 @@ docker-compose up
 
 > Replace `/dev/ttyACM0` with your serial device
 
-Enjoy :smile:
+For more info about docker check [here](docker/README.md)
 
-#### Auto Update OZW device database
-
-If you would like to enable this feature of OZW you need to keep the device database inside a volume or a local folder and map it inside the container. To do this follow this steps:
-
-```sh
-APP=$(docker run --rm -it -d robertslando/zwave2mqtt:latest)
-docker cp $APP:/usr/local/etc/openzwave ./
-docker kill $APP
-```
-
-With this command you should have copied all your container device db in a local folder named `openzwave`. Now you should map this folder inside your container:
-
-By adding an option:
-
-`-v $(pwd)/openzwave:/usr/local/etc/openzwave`
-
-Or in docker-compose file:
-
-```yml
-volumes:
-      - ./openzwave:/usr/local/etc/openzwave
-```
 
 ### Kubernetes way
 
