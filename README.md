@@ -38,6 +38,7 @@ After a [discussion](https://github.com/OpenZWave/Zwave2Mqtt/issues/201) with Op
   - [📖 Table of contents](#%f0%9f%93%96-table-of-contents)
   - [:electric_plug: Installation](#electricplug-installation)
     - [DOCKER :tada: way](#docker-tada-way)
+      - [Auto Update OZW device database](#auto-update-ozw-device-database)
     - [Kubernetes way](#kubernetes-way)
     - [NodeJS or PKG version](#nodejs-or-pkg-version)
   - [:nerd_face: Development](#nerdface-development)
@@ -96,7 +97,7 @@ mkdir store
 docker run --rm -it -p 8091:8091 --device=/dev/ttyACM0 -v $(pwd)/store:/usr/src/app/store openzwave/zwave2mqtt:latest
 
 # As a service
-wget https://raw.githubusercontent.com/openzwave/zwave2mqtt/master/docker-compose.yml
+wget https://raw.githubusercontent.com/openzwave/zwave2mqtt/master/docker/docker-compose.yml
 docker-compose up
 ```
 

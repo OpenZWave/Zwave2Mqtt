@@ -8,14 +8,6 @@ Docker container for Zwave2Mqtt Gateway and Control Panel app using pkg
 
 **ATTENTION: STARTING FROM Z2M 2.1.1 OZW 1.4 SUPPORT HAS ENDED AND `latest` TAG WILL ALWAYS HAVE OZW 1.6**
 
-> **Image size acually is lower than 80MB**
-
-```bash
-daniel@daniel:~/Zwave2Mqtt-docker$ docker images
-REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
-robertslando/zwave2mqtt         latest              043a0d327ad6        2 minutes ago       76.7MB
-```
-
 ## Tags
 
 Supported architectures are:
@@ -70,7 +62,7 @@ docker run --rm -it -p 8091:8091 --device=/dev/ttyACM0 -v $(pwd)/store:/usr/src/
 
 ### Run as a service
 
-To run the app as a service you can use the `docker-compose.yml` file you find on [github repo](https://github.com/robertsLando/Zwave2Mqtt-docker/tree/master/compose/docker-compose.yml). Here is the content:
+To run the app as a service you can use the `docker-compose.yml` file you find [here](./docker-compose.yml). Here is the content:
 
 ```yml
 version: "3.7"
@@ -253,8 +245,8 @@ volumes:
 The docker images are the latest stable images of the [zwave2mqtt](https://github.com/OpenZWave/Zwave2Mqtt) repo. If you want to keep your image updated with the latest changes you can build it on your local machine. Just select a commit sha, a branch name, or a tag name, and pass it to docker build using the *--build-arg* option for the *Z2M_GIT_SHA1* and *OPENZWAVE_GIT_SHA1* arguments. For example:
 
 ```bash
-git clone https://github.com/robertsLando/Zwave2Mqtt-docker.git
-cd Zwave2Mqtt-docker
+git clone https://github.com/OpenZWave/Zwave2Mqtt.git
+cd Zwave2Mqtt/docker
 docker build --build-arg Z2M_GIT_SHA1=master --build-arg OPENZWAVE_GIT_SHA1=master -t robertslando/zwave2mqtt:latest .
 ```
 
