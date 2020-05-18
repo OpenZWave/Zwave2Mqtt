@@ -31,7 +31,6 @@ RUN npm prune --production
 RUN rm -rf \
     build \
     index.html \
-    package-lock.json \
     package.sh \
     src \
     static \
