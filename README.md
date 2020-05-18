@@ -1,11 +1,12 @@
 # Zwave To MQTT
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/OpenZWave/Zwave2Mqtt)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/1897-shield.svg)](https://madewithvuejs.com/p/zwave2mqtt/shield-link)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
-[![ci]](https://github.com/OpenZWave/Zwave2Mqtt/workflows/ci/badge.svg?branch=master)![GitHub package.json version](https://img.shields.io/github/package-json/v/OpenZWave/Zwave2Mqtt)
-[![Docker Build]](https://github.com/OpenZWave/Zwave2Mqtt/workflows/Docker%20Build/badge.svg)
-[![GitHub All Releases]](https://img.shields.io/github/downloads/OpenZWave/Zwave2Mqtt/total)
+![ci](https://github.com/OpenZWave/Zwave2Mqtt/workflows/ci/badge.svg?branch=master)
+![Docker Build](https://github.com/OpenZWave/Zwave2Mqtt/workflows/Docker%20Build/badge.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/OpenZWave/Zwave2Mqtt/total)
 [![Coverage Status](https://coveralls.io/repos/github/OpenZWave/Zwave2Mqtt/badge.svg?branch=master)](https://coveralls.io/github/OpenZWave/Zwave2Mqtt?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/OpenZWave/Zwave2Mqtt/badge.svg?targetFile=package.json)](https://snyk.io/test/github/OpenZWave/Zwave2Mqtt?targetFile=package.json)
 [![Dependencies Status](https://david-dm.org/OpenZWave/Zwave2Mqtt/status.svg)](https://david-dm.org/OpenZWave/Zwave2Mqtt)
