@@ -19,7 +19,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           cd docker
-          docker build .
+          docker build ../
 
       - name: Login to dockerhub
         if: ${{ github.event_name != 'pull_request' }}
@@ -40,7 +40,7 @@ jobs:
           --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:latest \
           --push \
-          .
+          ../
 
       - name: Latest & tag
         if: ${{ github.event_name == 'release' }}
@@ -51,4 +51,4 @@ jobs:
           -t robertslando/zwave2mqtt:$(echo ${GITHUB_REF} | sed "s/git\/refs\/tags\/v//") \
           -t robertslando/zwave2mqtt:latest \
           --push \
-          .
+          ../
