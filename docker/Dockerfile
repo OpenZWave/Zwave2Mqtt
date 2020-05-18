@@ -23,7 +23,7 @@ RUN git checkout ${OPENZWAVE_GIT_SHA1}
 RUN make install
 
 WORKDIR /root/Zwave2Mqtt
-COPY . .
+COPY ../ .
 RUN npm config set unsafe-perm true
 RUN npm install
 RUN npm run build
