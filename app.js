@@ -14,9 +14,9 @@ var store = reqlib('config/store.js')
 var debug = reqlib('/lib/debug')('App')
 var history = require('connect-history-api-fallback')
 var utils = reqlib('/lib/utils.js')
-
 var gw; //the gateway instance
 let io;
+const renderIndex = reqlib('/lib/renderIndex')
 
 debug('Zwave2Mqtt version: ' + require('./package.json').version)
 debug('Application path:' + utils.getPath(true))
@@ -29,6 +29,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 app.use(cookieParser());
+
+app.get('/', renderIndex);
 
 app.use('/', express.static(utils.joinPath(false, 'dist')));
 

@@ -20,9 +20,18 @@
     <link rel="mask-icon" href="<%= config.base %>/static/favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    <% cssFiles %>
+    <!-- For serving the index via express -->
+    <% for ( let css of cssFiles ){  %>
+      <link rel="stylesheet" href="<%= config.base %>/<%= css %>">
+    <% } %>
   </head>
   <body>
     <div id="app"></div>
+    <!-- For serving the index via express -->
+    <% for ( let src of jsFiles ){  %>
+      <script src="<%= config.base %>/<%= src %>"></script>
+    <% } %>
     <!-- built files will be auto injected -->
   </body>
 </html>
