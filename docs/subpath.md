@@ -12,16 +12,15 @@ without having to build again the frontend.
 You can pass the external path by setting the `X-External-Path` header, for example
 suppose you had the following `nginx` configuration:
 
-```nginx
+```text
 server {
+  listen 9000 default_server;
+  listen [::]:9000 default_server;
 
-	listen 9000 default_server;
-	listen [::]:9000 default_server;
-
-	location /some/deep/map/ {
- 	  proxy_pass http://127.0.0.1:8091/;
-      proxy_set_header X-External-Path /some/deep/map;
-	}
+  location /some/deep/map/ {
+    proxy_pass http://127.0.0.1:8091/;
+    proxy_set_header X-External-Path /some/deep/map;
+  }
 }
 ```
 
@@ -32,8 +31,8 @@ In case you are using the ingress of Home Assistant you will want to
 pick up the `X-Ingress-Path;` and map it, something along
 these lines:
 
-```nginx
-    proxy_set_header X-External-Path $http_x_ingress_path;
+```text
+  proxy_set_header X-External-Path $http_x_ingress_path;
 ```
 
 ## Using the configuration
@@ -41,3 +40,14 @@ these lines:
 You can simply change the `config/app.js` and set `base` to whatever is
 the subpath you will be serving this from.
 
+As an example, if your proxy is placing the app behind `/zwave/` your configuration
+would look like:
+
+```javascript
+module.exports = {
+	'title': 'ZWave to MQTT',
+	'storeDir': 'store',
+	'base': '/zwave/',
+	'port': 8091
+};
+```
