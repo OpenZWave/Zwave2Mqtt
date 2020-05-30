@@ -168,6 +168,11 @@ kubectl apply -k https://raw.githubusercontent.com/openzwave/zwave2mqtt/master/k
 
 4. Open the browser <http://localhost:8091>
 
+### Reverse Proxy Setup
+
+If you need to setup ZWave To MQTT behind a reverse proxy that needs a *subpath* to
+work, take a look at [this](docs/subpath.md).
+
 ## :nerd_face: Development
 
 Developers who wants to debug the application have to open 2 terminals.
@@ -412,6 +417,7 @@ messages to `hass/status`. Be sure to add this to your `configuration.yaml` if y
 Zwave2Mqtt to resend the cached values when Home Assistant restarts.
 
 Zwave2Mqtt try to do its best to guess how to map devices from Zwave to HASS. At the moment it try to guess the device to generate based on zwave values command classes, index and units of the value. When the discovered device doesn't fit your needs you can you can set custom a `device_class` to values using Gateway value table.
+
 
 ### Components management
 
