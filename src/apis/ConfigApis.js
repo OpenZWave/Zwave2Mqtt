@@ -1,16 +1,26 @@
 import axios from 'axios'
 import { loadProgressBar } from 'axios-progress-bar'
 
-axios.defaults.socketUrl = document.baseURI
+function getBasePath () {
+  return document.baseURI.replace(/\/$/, '')
+}
+
+axios.defaults.socketUrl = getBasePath()
 axios.defaults.baseURL = axios.defaults.socketUrl + '/api'
 
 loadProgressBar()
 
 export default {
-  getSocketIP () { return axios.defaults.socketUrl },
+  getBasePath () {
+    return getBasePath()
+  },
+  getSocketIP () {
+    return getBasePath()
+  },
   getSocketPath () {
     const innerPath = document.baseURI.split('/').splice(3).join('/')
-    return `/${innerPath}/socket.io`.replace('//', '/')
+    const socketPath = `/${innerPath}/socket.io`.replace('//', '/')
+    return socketPath === '/socket.io' ? undefined : socketPath
   },
   getConfig () {
     return axios.get('/settings')

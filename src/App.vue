@@ -194,7 +194,7 @@ export default {
       snackbar: false,
       snackbarText: '',
       dark: false,
-      baseURI: document.baseURI
+      baseURI: ConfigApis.getBasePath()
     }
   },
   watch: {
@@ -213,7 +213,9 @@ export default {
 
     var self = this
 
-    this.socket = io(ConfigApis.getSocketIP(), { path: ConfigApis.getSocketPath() })
+    this.socket = io(ConfigApis.getSocketIP(), {
+      path: ConfigApis.getSocketPath()
+    })
 
     this.socket.on('connect', () => {
       self.updateStatus('Connected', 'green')
