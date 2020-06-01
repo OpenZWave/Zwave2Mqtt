@@ -183,6 +183,7 @@ module.exports = {
   '2-40976-266': [DANFOSS_TRV_ZWAVE], // Popp Radiator Thermostat
   '99-12340-18756': [FAN_DIMMER], // GE 1724 Dimmer
   '99-12593-18756': [FAN_DIMMER], // GE 1724 Dimmer
+  '57-12593-18756': [FAN_DIMMER], // Honeywell 39358 In-Wall Fan Control
   '152-12-25857': [THERMOSTAT_2GIG], // Radio Thermostat / 2GIG CT101
   '152-256-8194': [THERMOSTAT_2GIG], // Radio Thermostat / 2GIG CT32
   '271-4096-770': [COVER], // Fibaro FGS222
