@@ -14,9 +14,6 @@ export default {
   getBasePath () {
     return getBasePath()
   },
-  getSocketIP () {
-    return getBasePath()
-  },
   getSocketPath () {
     const innerPath = document.baseURI.split('/').splice(3).join('/')
     const socketPath = `/${innerPath}/socket.io`.replace('//', '/')
