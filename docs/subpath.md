@@ -13,14 +13,22 @@ You can pass the external path by setting the `X-External-Path` header, for exam
 suppose you had the following `nginx` configuration:
 
 ```nginx
-server {
-  listen 9000 default_server;
-  listen [::]:9000 default_server;
-
-  location /some/deep/map/ {
-    proxy_pass http://127.0.0.1:8091/;
-    proxy_set_header X-External-Path /some/deep/map;
-  }
+map $http_upgrade $connection_upgrade {    
+    default upgrade;    
+    '' close;                      
+}                                       
+                                        
+server {                           
+    listen 9000 default_server;             
+    listen [::]:9000 default_server;                       
+                                                           
+    location /hassio/ingress/ {    
+        proxy_pass http://localhost:8091/;  
+        proxy_set_header X-External-Path /hassio/ingress;  
+        proxy_http_version 1.1;                            
+        proxy_set_header Upgrade $http_upgrade;            
+        proxy_set_header Connection $connection_upgrade;    
+    }
 }
 ```
 
