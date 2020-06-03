@@ -12,17 +12,17 @@
     <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
     <meta name=apple-mobile-web-app-title content="Zwave To MQTT">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= config.base %>/static/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= config.base %>/static/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= config.base %>/static/favicons/favicon-16x16.png">
-    <link rel="manifest" href="<%= config.base %>/static/favicons/site.webmanifest">
-    <link rel="mask-icon" href="<%= config.base %>/static/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= config.base %>static/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= config.base %>static/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= config.base %>static/favicons/favicon-16x16.png">
+    <link rel="manifest" href="<%= config.base %>static/favicons/site.webmanifest">
+    <link rel="mask-icon" href="<%= config.base %>static/favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- For serving the index via express -->
     <% if (typeof cssFiles !== 'undefined') { %>
       <% for ( let css of cssFiles ){  %>
-        <link rel="stylesheet" href="<%= config.base %>/<%= css %>">
+        <link rel="stylesheet" href="<%= config.base %><%= css %>">
       <% } %>
     <% } %>
   </head>
@@ -31,7 +31,7 @@
     <!-- For serving the index via express -->
     <% if (typeof jsFiles !== 'undefined') { %>
       <% for ( let src of jsFiles ){  %>
-        <script src="<%= config.base %>/<%= src %>"></script>
+        <script src="<%= config.base %><%= src %>"></script>
       <% } %>
     <% } %>
     <!-- built files will be auto injected -->

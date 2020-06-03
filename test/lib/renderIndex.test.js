@@ -37,14 +37,14 @@ describe('#renderIndex', () => {
           'x-external-path': '/test/base'
         }
       }, mockResponse)
-      lastOptions.config.base.should.equal('/test/base')
+      lastOptions.config.base.should.equal('/test/base/')
     })
 
     it('uses configured value if no header is present', () => {
       renderIndex({
         headers: {}
       }, mockResponse)
-      lastOptions.config.base.should.equal('/configured/path')
+      lastOptions.config.base.should.equal('/configured/path/')
     })
   })
 
