@@ -36,7 +36,7 @@ After a [discussion](https://github.com/OpenZWave/Zwave2Mqtt/issues/201) with Op
 ## 📖 Table of contents
 
 - [Zwave To MQTT](#zwave-to-mqtt)
-  - [!! ATTENTION !!](#attention)
+  - [!! ATTENTION !!](#-attention)
   - [📖 Table of contents](#%f0%9f%93%96-table-of-contents)
   - [:electric_plug: Installation](#electricplug-installation)
     - [DOCKER :tada: way](#docker-tada-way)
