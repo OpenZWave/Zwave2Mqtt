@@ -14,9 +14,9 @@ var store = reqlib('config/store.js')
 var debug = reqlib('/lib/debug')('App')
 var history = require('connect-history-api-fallback')
 var utils = reqlib('/lib/utils.js')
+const renderIndex = reqlib('/lib/renderIndex')
 var gw; //the gateway instance
 let io;
-const renderIndex = reqlib('/lib/renderIndex')
 
 debug('Zwave2Mqtt version: ' + require('./package.json').version)
 debug('Application path:' + utils.getPath(true))
