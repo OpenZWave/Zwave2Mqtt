@@ -12,7 +12,7 @@ without having to build again the frontend.
 You can pass the external path by setting the `X-External-Path` header, for example
 suppose you had the following `nginx` configuration:
 
-```text
+```nginx
 server {
   listen 9000 default_server;
   listen [::]:9000 default_server;
@@ -31,7 +31,7 @@ In case you are using the [ingress of Home Assistant](https://www.home-assistant
 pick up the `X-Ingress-Path;` and map it, something along
 these lines:
 
-```text
+```nginx
   proxy_set_header X-External-Path $http_x_ingress_path;
 ```
 
