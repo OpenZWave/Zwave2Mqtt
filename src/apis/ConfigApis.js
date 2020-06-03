@@ -6,7 +6,7 @@ function getBasePath () {
 }
 
 axios.defaults.socketUrl = getBasePath()
-axios.defaults.baseURL = axios.defaults.socketUrl + '/api'
+axios.defaults.baseURL = `${axios.defaults.socketUrl}/api`
 
 loadProgressBar()
 
