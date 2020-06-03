@@ -42,6 +42,7 @@ After a [discussion](https://github.com/OpenZWave/Zwave2Mqtt/issues/201) with Op
     - [DOCKER :tada: way](#docker-tada-way)
     - [Kubernetes way](#kubernetes-way)
     - [NodeJS or PKG version](#nodejs-or-pkg-version)
+    - [Reverse Proxy Setup](#reverse-proxy-setup)
   - [:nerd_face: Development](#nerdface-development)
   - [:wrench: Usage](#wrench-usage)
     - [Zwave](#zwave)
