@@ -4,7 +4,7 @@ There are two ways to enable ZWave To MQTT to sit behing a proxy that uses
 subpaths to serve the pages and services. 
 
 You can use a header to signal where the external path is or you can configure
-the base path. In both cases this are dynamic configurations, so you can deploy
+the base path. In both cases these are dynamic configurations, so you can deploy
 without having to build again the frontend.
 
 ## Using an HTTP header
