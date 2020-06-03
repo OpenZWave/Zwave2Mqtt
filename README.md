@@ -26,8 +26,8 @@
 
 Fully configurable Zwave to MQTT **Gateway** and **Control Panel**.
 
-- **Backend**: NodeJS, Express, socket.io, Mqttjs, openzwave-shared, Webpack
-- **Frontend**: Vue,  socket.io, [Vuetify](https://github.com/vuetifyjs/vuetify)
+- **Backend**: [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [socket.io](https://github.com/socketio/socket.io), [Mqttjs](https://github.com/mqttjs/MQTT.js), [openzwave-shared](https://github.com/OpenZWave/node-openzwave-shared), [Webpack](https://webpack.js.org/)
+- **Frontend**: [Vue](https://vuejs.org/),  [socket.io](https://github.com/socketio/socket.io), [Vuetify](https://github.com/vuetifyjs/vuetify)
 
 ## !! ATTENTION
 
