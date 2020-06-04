@@ -62,7 +62,7 @@ app.startSocket = function (server) {
   io.on('connection', function (socket) {
 
     debug("New connection", socket.id);
-    
+
     socket.on('INITED', function () {
       if(gw.zwave)
         socket.emit('INIT', { nodes: gw.zwave.nodes, info: gw.zwave.ozwConfig, error: gw.zwave.error, cntStatus: gw.zwave.cntStatus })
@@ -147,7 +147,7 @@ app.get('/health/:client', async function (req, res) {
     status = gw && gw[client] ? gw[client].getStatus().status : false
   }
 
-  res.status(status ? 200 : 500).send(status ? 'Ok' : 'Error') 
+  res.status(status ? 200 : 500).send(status ? 'Ok' : 'Error')
 })
 
 
