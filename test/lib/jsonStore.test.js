@@ -74,13 +74,11 @@ describe('#jsonStore', () => {
         mod.__set__('getFile', getFile)
       })
       it('ok', () =>
-        mod
-          .init({ file: 'foobar' })
-          .should.eventually.deep.equal({
-            known: 'no',
-            foobar: 'foo',
-            foo: 'bar'
-          }))
+        mod.init({ file: 'foobar' }).should.eventually.deep.equal({
+          known: 'no',
+          foobar: 'foo',
+          foo: 'bar'
+        }))
       it('error', () => {
         mod.__set__('getFile', sinon.stub().rejects('fo'))
         return mod.init({ file: 'foobar' }).should.eventually.be.rejected

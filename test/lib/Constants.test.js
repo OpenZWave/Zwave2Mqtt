@@ -17,29 +17,23 @@ describe('#Constants', () => {
       mod._productionMap = map
     })
     it('known', () =>
-      mod
-        .productionType(1)
-        .should.deep.equal({
-          objectId: 'foo',
-          props: { device_class: 'power' },
-          sensor: 'energy_production'
-        }))
+      mod.productionType(1).should.deep.equal({
+        objectId: 'foo',
+        props: { device_class: 'power' },
+        sensor: 'energy_production'
+      }))
     it('unknown', () =>
-      mod
-        .productionType(2)
-        .should.deep.equal({
-          objectId: 'unknown',
-          props: { device_class: 'power' },
-          sensor: 'energy_production'
-        }))
+      mod.productionType(2).should.deep.equal({
+        objectId: 'unknown',
+        props: { device_class: 'power' },
+        sensor: 'energy_production'
+      }))
     it('timestamp', () =>
-      mod
-        .productionType(3)
-        .should.deep.equal({
-          objectId: 'unknown',
-          props: { device_class: 'timestamp' },
-          sensor: 'energy_production'
-        }))
+      mod.productionType(3).should.deep.equal({
+        objectId: 'unknown',
+        props: { device_class: 'timestamp' },
+        sensor: 'energy_production'
+      }))
   })
   describe('#meterType()', () => {
     let sensorType
