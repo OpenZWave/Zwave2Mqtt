@@ -171,7 +171,7 @@ kubectl apply -k https://raw.githubusercontent.com/openzwave/zwave2mqtt/master/k
 
 ### Reverse Proxy Setup
 
-If you need to setup ZWave To MQTT behind a reverse proxy that needs a *subpath* to
+If you need to setup ZWave To MQTT behind a reverse proxy that needs a _subpath_ to
 work, take a look at [this](docs/subpath.md).
 
 ## :nerd_face: Development

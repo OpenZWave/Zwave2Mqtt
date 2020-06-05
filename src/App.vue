@@ -4,10 +4,15 @@
       <v-list nav class="py-0">
         <v-list-item :class="mini && 'px-0'">
           <v-list-item-avatar>
-            <img style="padding:3px;border-radius:0" :src="`${baseURI}/static/logo.png`" />
+            <img
+              style="padding:3px;border-radius:0"
+              :src="`${baseURI}/static/logo.png`"
+            />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>{{"ZWave2MQTT v" + version}}</v-list-item-title>
+            <v-list-item-title>{{
+              'ZWave2MQTT v' + version
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -48,7 +53,8 @@
             style="cursor:default;"
             :color="statusColor || 'primary'"
             v-on="on"
-          >swap_horizontal_circle</v-icon>
+            >swap_horizontal_circle</v-icon
+          >
         </template>
         <span>{{ status }}</span>
       </v-tooltip>

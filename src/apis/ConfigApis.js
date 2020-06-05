@@ -15,7 +15,10 @@ export default {
     return getBasePath()
   },
   getSocketPath () {
-    const innerPath = document.baseURI.split('/').splice(3).join('/')
+    const innerPath = document.baseURI
+      .split('/')
+      .splice(3)
+      .join('/')
     const socketPath = `/${innerPath}/socket.io`.replace('//', '/')
     return socketPath === '/socket.io' ? undefined : socketPath
   },

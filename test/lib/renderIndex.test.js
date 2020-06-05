@@ -32,18 +32,24 @@ describe('#renderIndex', () => {
     })
 
     it('uses the base from the `X-External-Path` header', () => {
-      renderIndex({
-        headers: {
-          'x-external-path': '/test/base'
-        }
-      }, mockResponse)
+      renderIndex(
+        {
+          headers: {
+            'x-external-path': '/test/base'
+          }
+        },
+        mockResponse
+      )
       lastOptions.config.base.should.equal('/test/base/')
     })
 
     it('uses configured value if no header is present', () => {
-      renderIndex({
-        headers: {}
-      }, mockResponse)
+      renderIndex(
+        {
+          headers: {}
+        },
+        mockResponse
+      )
       lastOptions.config.base.should.equal('/configured/path/')
     })
   })
@@ -63,9 +69,12 @@ describe('#renderIndex', () => {
 
     it('When no dist files present it will have empty css and js files', () => {
       mockedReaddir.returns([])
-      renderIndex({
-        headers: {}
-      }, mockResponse)
+      renderIndex(
+        {
+          headers: {}
+        },
+        mockResponse
+      )
       lastTpl.should.equal('index.ejs')
       lastOptions.cssFiles.should.eql([])
       lastOptions.jsFiles.should.eql([])
@@ -75,19 +84,16 @@ describe('#renderIndex', () => {
       console.log(cssFolder)
       mockedReaddir
         .withArgs(cssFolder)
-        .returns([
-          'valid-css.css',
-          'invalid-css.scss'
-        ])
+        .returns(['valid-css.css', 'invalid-css.scss'])
       mockedReaddir
         .withArgs(jsFolder)
-        .returns([
-          'valid-js.js',
-          'invalid-js.map'
-        ])
-      renderIndex({
-        headers: {}
-      }, mockResponse)
+        .returns(['valid-js.js', 'invalid-js.map'])
+      renderIndex(
+        {
+          headers: {}
+        },
+        mockResponse
+      )
       lastTpl.should.equal('index.ejs')
       lastOptions.cssFiles.should.eql(['static/css/valid-css.css'])
       lastOptions.jsFiles.should.eql(['static/js/valid-js.js'])

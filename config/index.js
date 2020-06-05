@@ -13,9 +13,9 @@ module.exports = {
       '/socket.io': {
         target: 'ws://localhost:8091',
         ws: true
-     },
-     '/health': 'http://localhost:8091',
-     '/api': 'http://localhost:8091'
+      },
+      '/health': 'http://localhost:8091',
+      '/api': 'http://localhost:8091'
     },
 
     // Various Dev Server settings

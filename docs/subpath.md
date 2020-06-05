@@ -53,9 +53,9 @@ would look like:
 
 ```javascript
 module.exports = {
-  'title': 'ZWave to MQTT',
-  'storeDir': 'store',
-  'base': '/zwave/',
-  'port': 8091
-};
+  title: 'ZWave to MQTT',
+  storeDir: 'store',
+  base: '/zwave/',
+  port: 8091
+}
 ```

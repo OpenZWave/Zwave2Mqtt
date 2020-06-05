@@ -15,8 +15,8 @@ var debug = reqlib('/lib/debug')('App')
 var history = require('connect-history-api-fallback')
 var utils = reqlib('/lib/utils.js')
 const renderIndex = reqlib('/lib/renderIndex')
-var gw; //the gateway instance
-let io;
+var gw //the gateway instance
+let io
 
 debug('Zwave2Mqtt version: ' + require('./package.json').version)
 debug('Application path:' + utils.getPath(true))
@@ -36,9 +36,9 @@ app.use(
 )
 app.use(cookieParser())
 
-app.get('/', renderIndex);
+app.get('/', renderIndex)
 
-app.use('/', express.static(utils.joinPath(false, 'dist')));
+app.use('/', express.static(utils.joinPath(false, 'dist')))
 
 app.use(cors())
 
