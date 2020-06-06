@@ -81,7 +81,6 @@ describe('#renderIndex', () => {
     })
 
     it('When dist files present will only return the ones with the correct extensions', () => {
-      console.log(cssFolder)
       mockedReaddir
         .withArgs(cssFolder)
         .returns(['valid-css.css', 'invalid-css.scss'])
