@@ -55,7 +55,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      title: 'ZWave  To MQTT',
+      title: 'ZWave To MQTT',
       filename: 'index.html',
       template: 'views/index.ejs',
       templateParameters: {
