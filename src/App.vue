@@ -218,7 +218,7 @@ export default {
 
     var self = this
 
-    this.socket = this.socket = io('/', {
+    this.socket = io('/', {
       path: ConfigApis.getSocketPath()
     })
 
