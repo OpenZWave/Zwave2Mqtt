@@ -40,7 +40,7 @@ describe('#renderIndex', () => {
         },
         mockResponse
       )
-      lastOptions.config.base.should.equal('/test/base/')
+      return lastOptions.config.base.should.equal('/test/base/')
     })
 
     it('uses configured value if no header is present', () => {
