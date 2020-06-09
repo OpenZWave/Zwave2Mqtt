@@ -105,7 +105,7 @@
     "morgan": "~1.10.0",
     "mqtt": "^4.1.0",
     "mqtt-nedb-store": "^0.1.1",
-    "native-url": "^0.3.1",
+    "native-url": "^0.3.2",
     "nedb": "^1.8.0",
     "openzwave-shared": "^1.7.0",
     "serialport": "^9.0.0",
