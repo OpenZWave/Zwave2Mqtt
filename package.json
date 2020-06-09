@@ -133,7 +133,7 @@
     "@babel/plugin-syntax-import-meta": "^7.10.1",
     "@babel/plugin-syntax-jsx": "^7.10.1",
     "@babel/plugin-transform-runtime": "^7.10.1",
-    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
     "auto-changelog": "^2.0.0",
     "autoprefixer": "^9.8.0",
     "babel-eslint": "^10.1.0",
