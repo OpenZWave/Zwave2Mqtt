@@ -182,7 +182,7 @@
     "release-it": "^13.6.2",
     "rewire": "^5.0.0",
     "rimraf": "^3.0.2",
-    "sass": "^1.26.7",
+    "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
     "semver": "^7.3.2",
     "shelljs": "^0.8.4",
