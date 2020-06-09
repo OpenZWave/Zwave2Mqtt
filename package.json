@@ -144,7 +144,7 @@
     "c8": "^7.1.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
     "deepmerge": "^4.2.2",
