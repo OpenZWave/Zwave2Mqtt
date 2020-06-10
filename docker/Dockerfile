@@ -11,7 +11,8 @@ RUN apk --no-cache add \
     coreutils \
     linux-headers \
     alpine-sdk \
-    python
+    python \
+    openssl
 
 # needed to build openzwave-shared
 COPY --from=ozw /usr/local/include/openzwave /usr/local/include/openzwave
