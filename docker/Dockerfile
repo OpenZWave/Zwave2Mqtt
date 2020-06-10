@@ -1,6 +1,6 @@
 # ----------------
 # STEP 1:
-FROM chrisns/openzwave:alpine@sha256:6a00709040c23ad689f41beffd2a93cb581b51e941beea4384530e7b3507e3ea as build-ozw
+FROM chrisns/openzwave:alpine@sha256:6a00709040c23ad689f41beffd2a93cb581b51e941beea4384530e7b3507e3ea as ozw
 
 # ----------------
 # STEP 2:
@@ -11,13 +11,12 @@ RUN apk --no-cache add \
     coreutils \
     linux-headers \
     alpine-sdk \
-    python \
-    openssl
+    python
 
 # needed to build openzwave-shared
-COPY --from=build-ozw /usr/local/include/openzwave /usr/local/include/openzwave
-COPY --from=build-ozw /openzwave/libopenzwave.so* /lib/
-COPY --from=build-ozw /openzwave/config /usr/local/etc/openzwave
+COPY --from=ozw /usr/local/include/openzwave /usr/local/include/openzwave
+COPY --from=ozw /openzwave/libopenzwave.so* /lib/
+COPY --from=ozw /openzwave/config /usr/local/etc/openzwave
 
 ENV LD_LIBRARY_PATH /lib
 
@@ -50,8 +49,8 @@ RUN apk add --no-cache \
     eudev
 
 # Copy files from previous build stage
-COPY --from=build-ozw /openzwave/libopenzwave.so* /lib/
-COPY --from=build-ozw /openzwave/config /usr/local/etc/openzwave
+COPY --from=ozw /openzwave/libopenzwave.so* /lib/
+COPY --from=ozw /openzwave/config /usr/local/etc/openzwave
 COPY --from=build-z2m /root/Zwave2Mqtt /usr/src/app
 
 # Set enviroment
