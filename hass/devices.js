@@ -198,13 +198,17 @@ module.exports = {
         brightness_value_template: '{{ (value_json.value) | round(0) }}',
         brightness_scale: '99',
         color_temp_state_topic: '51-1-0',
-        color_temp_command_template: "{{ '#%02x%02x%02x%02x%02x' | format(0, 0, 0, (0.7349 * (value - 153)) | round(0), 255 - (0.7349 * (value - 153)) | round(0))}}",
+        color_temp_command_template:
+          "{{ '#%02x%02x%02x%02x%02x' | format(0, 0, 0, (0.7349 * (value - 153)) | round(0), 255 - (0.7349 * (value - 153)) | round(0))}}",
         color_temp_command_topic: '51-1-0',
-        color_temp_value_template: '{{ (((value_json.value[7:9] | int(0, 16)) / 0.7349 ) | round(0)) + 153 }}',
-        rgb_command_template: "{{'#%02x%02x%02x%02x%02x' | format(red, green, blue,0,0)}}",
+        color_temp_value_template:
+          '{{ (((value_json.value[7:9] | int(0, 16)) / 0.7349 ) | round(0)) + 153 }}',
+        rgb_command_template:
+          "{{'#%02x%02x%02x%02x%02x' | format(red, green, blue,0,0)}}",
         rgb_command_topic: '51-1-0',
         rgb_state_topic: '51-1-0',
-        rgb_value_template: '{{ value_json.value[1:3] | int(0, 16) }},{{ value_json.value[3:5] | int(0, 16) }},{{ value_json.value[5:7] | int(0, 16) }}'
+        rgb_value_template:
+          '{{ value_json.value[1:3] | int(0, 16) }},{{ value_json.value[3:5] | int(0, 16) }},{{ value_json.value[5:7] | int(0, 16) }}'
       }
     }
   ],
