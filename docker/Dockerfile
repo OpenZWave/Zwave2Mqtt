@@ -1,6 +1,6 @@
 # ----------------
 # STEP 1:
-FROM chrisns/openzwave:alpine-sha-d2de6990389888850e936894080e4096c822e379 as ozw
+FROM chrisns/openzwave:alpine as ozw
 
 # ----------------
 # STEP 2:
