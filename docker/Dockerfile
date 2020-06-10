@@ -38,7 +38,7 @@ RUN rm -rf \
 
 # ----------------
 # STEP 3:
-FROM node:erbium-alpine
+FROM node:erbium-alpine@sha256:215a9fbef4df2c1ceb7c79481d3cfd94ad8f1f0105bade39f3be907bf386c5e1
 
 LABEL maintainer="robertsLando"
 
