@@ -1,6 +1,6 @@
 # ----------------
 # STEP 1:
-FROM chrisns/openzwave:alpine as build-ozw
+FROM chrisns/openzwave:alpine@sha256:6a00709040c23ad689f41beffd2a93cb581b51e941beea4384530e7b3507e3ea as build-ozw
 
 # ----------------
 # STEP 2:
