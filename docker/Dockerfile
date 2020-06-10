@@ -1,10 +1,10 @@
 # ----------------
 # STEP 1:
-FROM chrisns/openzwave:alpine@sha256:6a00709040c23ad689f41beffd2a93cb581b51e941beea4384530e7b3507e3ea as ozw
+FROM chrisns/openzwave:alpine-sha-d2de6990389888850e936894080e4096c822e379 as ozw
 
 # ----------------
 # STEP 2:
-FROM node:erbium-alpine@sha256:215a9fbef4df2c1ceb7c79481d3cfd94ad8f1f0105bade39f3be907bf386c5e1 AS build-z2m
+FROM node:12.18.0-alpine AS build-z2m
 
 # Install required dependencies
 RUN apk --no-cache add \
@@ -38,7 +38,7 @@ RUN rm -rf \
 
 # ----------------
 # STEP 3:
-FROM node:erbium-alpine@sha256:215a9fbef4df2c1ceb7c79481d3cfd94ad8f1f0105bade39f3be907bf386c5e1
+FROM node:12.18.0-alpine
 
 LABEL maintainer="robertsLando"
 
