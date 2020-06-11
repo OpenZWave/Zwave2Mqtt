@@ -21,7 +21,7 @@ jobs:
         run: |
           docker buildx build \
           -f docker/Dockerfile \
-          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:dev \
           .
 
@@ -33,15 +33,12 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - uses: crazy-max/ghaction-docker-buildx@v1
-        if: ${{ github.event_name != 'pull_request' }}
-
       - name: Dev
         if: ${{ github.ref == 'refs/heads/master'}}
         run: |
           docker buildx build \
           -f docker/Dockerfile \
-          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:dev \
           --push \
           .
@@ -51,7 +48,7 @@ jobs:
         run: |
           docker buildx build \
           -f docker/Dockerfile \
-          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 \
+          --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
           -t robertslando/zwave2mqtt:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//") \
           -t robertslando/zwave2mqtt:latest \
           --push \
