@@ -1,0 +1,8 @@
+{
+    "mochaExplorer.files": "**/*.test.js",
+    "mochaExplorer.require": "esm",
+    "[vue]": {
+      "editor.defaultFormatter": "octref.vetur"
+    },
+    "mochaExplorer.cwd": ".."
+}
