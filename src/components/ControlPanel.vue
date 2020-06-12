@@ -74,94 +74,7 @@
             <v-switch label="Show hidden nodes" v-model="showHidden"></v-switch>
           </v-flex>
         </v-layout>
-
-        <v-data-table
-          :headers="headers"
-          :items="tableNodes"
-          :items-per-page-options="[10, 20, { text: 'All', value: -1 }]"
-          item-key="node_id"
-          class="elevation-1"
-        >
-          <template v-slot:body.prepend>
-            <tr>
-              <td>
-              </td>
-              <td>
-                <v-select
-                  v-model="filters.types"
-                  :items="types"
-                  chips
-                  dense
-                  multiple
-                ></v-select>
-              </td>
-               <td>
-                <v-text-field v-model="filters.product" type="text" label="Product Name"></v-text-field>
-              </td>
-              <td>
-                <v-text-field v-model="filters.name" type="text" label="Name"></v-text-field>
-              </td>
-              <td>
-                <v-select
-                  v-model="filters.locations"
-                  :items="locations"
-                  chips
-                  dense
-                  multiple
-                ></v-select>
-              </td>
-              <td>
-              </td>
-              <td>
-                <v-select
-                  v-model="filters.status"
-                  :items="states"
-                  chips
-                  dense
-                  multiple
-                ></v-select>
-              </td>
-              <td>
-              </td>
-            </tr>
-          </template>
-          <template v-slot:item="{ item }">
-            <tr
-              :style="{
-                cursor: 'pointer',
-                background:
-                  selectedNode === item
-                    ? $vuetify.theme.themes.light.accent
-                    : 'none'
-              }"
-              @click.stop="selectNode(item)"
-            >
-              <td>{{ item.node_id }}</td>
-              <td>{{ item.type }}</td>
-              <td class="td-large" :title="item.ready
-                    ? item.product + ' (' + item.manufacturer + ')'
-                    : ''">
-                {{
-                  item.ready
-                    ? item.product + ' (' + item.manufacturer + ')'
-                    : ''
-                }}
-              </td>
-              <td>{{ item.name || '' }}</td>
-              <td>{{ item.loc || '' }}</td>
-              <td>{{ item.secure ? 'Yes' : 'No' }}</td>
-              <td>{{ item.status }}</td>
-              <td>
-                {{
-                  item.lastActive
-                    ? new Date(item.lastActive).toLocaleString()
-                    : 'Never'
-                }}
-              </td>
-            </tr>
-          </template>
-        </v-data-table>
-
+        <nodes-table :nodes="nodes" v-on:node-selected="selectNode"/>
         <v-tabs style="margin-top:10px" v-model="currentTab" fixed-tabs>
           <v-tab key="node">Node</v-tab>
           <v-tab key="groups">Groups</v-tab>
@@ -651,12 +564,7 @@
 </template>
 
 <style scoped>
-.td-large {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 12em;
-  overflow-x: hidden;
-}
+
 </style>
 
 <script>
@@ -668,7 +576,7 @@ import Confirm from '@/components/Confirm'
 import AnsiUp from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
-import NodeCollection from '../modules/NodeCollection'
+import NodesTable from '@/components/nodes-table'
 
 const ansiUp = new AnsiUp()
 
@@ -684,7 +592,8 @@ export default {
   components: {
     ValueID,
     DialogSceneValue,
-    Confirm
+    Confirm,
+    NodesTable
   },
   computed: {
     scenesWithId () {
@@ -695,30 +604,6 @@ export default {
     },
     dialogTitle () {
       return this.editedIndex === -1 ? 'New Value' : 'Edit Value'
-    },
-    nodeCollection () {
-      return new NodeCollection(this.nodes)
-    },
-    filteredNodes () {
-      return this.nodeCollection
-        .contains(['product', 'manufacturer'], this.filters.product ? this.filters.product : '')
-        .contains(['name'], this.filters.name ? this.filters.name : '')
-        .equalsAny('loc', this.filters.locations ? this.filters.locations : [])
-        .equalsAny('status', this.filters.status ? this.filters.status : [])
-        .equalsAny('type', this.filters.types ? this.filters.types : [])
-        .filter('failed', (failed) => this.showHidden ? true : !failed)
-    },
-    tableNodes () {
-      return this.filteredNodes.nodes
-    },
-    locations () {
-      return this.nodeCollection.values('loc')
-    },
-    states () {
-      return this.nodeCollection.values('status')
-    },
-    types () {
-      return this.nodeCollection.values('type')
     },
     hassDevices () {
       var devices = []
@@ -948,16 +833,6 @@ export default {
       locError: null,
       newLoc: '',
       selectedNode: null,
-      headers: [
-        { text: 'ID', value: 'node_id' },
-        { text: 'Type', value: 'type' },
-        { text: 'Product', value: 'product' },
-        { text: 'Name', value: 'name' },
-        { text: 'Location', value: 'loc' },
-        { text: 'Secure', value: 'secure' },
-        { text: 'Status', value: 'status' },
-        { text: 'Last Active', value: 'lastActive' }
-      ],
       rules: {
         required: value => {
           var valid = false
@@ -974,13 +849,13 @@ export default {
     showSnackbar (text) {
       this.$emit('showSnackbar', text)
     },
-    selectNode (item) {
-      if (!item) return
+    selectNode ({ node }) {
+      if (!node) return
 
-      if (this.selectedNode === item) {
+      if (this.selectedNode === node) {
         this.selectedNode = null
       } else {
-        this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
+        this.selectedNode = this.nodes.find(n => n.node_id === node.node_id)
       }
     },
     getValue (v) {
