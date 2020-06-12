@@ -115,6 +115,21 @@ describe('NodeCollection', () => {
     })
   })
   describe('#equalsAny', () => {
+    it('returns all nodes when values has no elements', () => {
+      const collection = new NodeCollection([
+        { id: 10 },
+        { id: '10' },
+        { id: 20 },
+        { id: '20' }
+      ])
+      const filtered = collection.equalsAny('id', [])
+      chai.expect(filtered.nodes).to.eql([
+        { id: 10 },
+        { id: '10' },
+        { id: 20 },
+        { id: '20' }
+      ])
+    })
     it('returns nodes with the properties equal to any of the values', () => {
       const collection = new NodeCollection([
         { id: 10 },

@@ -82,6 +82,49 @@
           item-key="node_id"
           class="elevation-1"
         >
+          <template v-slot:body.prepend>
+            <tr>
+              <td>
+              </td>
+              <td>
+                <v-select
+                  v-model="filters.types"
+                  :items="types"
+                  chips
+                  dense
+                  multiple
+                ></v-select>
+              </td>
+               <td>
+                <v-text-field v-model="filters.product" type="text" label="Product Name"></v-text-field>
+              </td>
+              <td>
+                <v-text-field v-model="filters.name" type="text" label="Name"></v-text-field>
+              </td>
+              <td>
+                <v-select
+                  v-model="filters.locations"
+                  :items="locations"
+                  chips
+                  dense
+                  multiple
+                ></v-select>
+              </td>
+              <td>
+              </td>
+              <td>
+                <v-select
+                  v-model="filters.status"
+                  :items="states"
+                  chips
+                  dense
+                  multiple
+                ></v-select>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </template>
           <template v-slot:item="{ item }">
             <tr
               :style="{
@@ -95,7 +138,9 @@
             >
               <td>{{ item.node_id }}</td>
               <td>{{ item.type }}</td>
-              <td>
+              <td class="td-large" :title="item.ready
+                    ? item.product + ' (' + item.manufacturer + ')'
+                    : ''">
                 {{
                   item.ready
                     ? item.product + ' (' + item.manufacturer + ')'
@@ -605,6 +650,15 @@
   </v-container>
 </template>
 
+<style scoped>
+.td-large {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12em;
+  overflow-x: hidden;
+}
+</style>
+
 <script>
 import ConfigApis from '@/apis/ConfigApis'
 
@@ -614,6 +668,7 @@ import Confirm from '@/components/Confirm'
 import AnsiUp from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
+import NodeCollection from '../modules/NodeCollection'
 
 const ansiUp = new AnsiUp()
 
@@ -641,8 +696,29 @@ export default {
     dialogTitle () {
       return this.editedIndex === -1 ? 'New Value' : 'Edit Value'
     },
+    nodeCollection () {
+      return new NodeCollection(this.nodes)
+    },
+    filteredNodes () {
+      return this.nodeCollection
+        .contains(['product', 'manufacturer'], this.filters.product ? this.filters.product : '')
+        .contains(['name'], this.filters.name ? this.filters.name : '')
+        .equalsAny('loc', this.filters.locations ? this.filters.locations : [])
+        .equalsAny('status', this.filters.status ? this.filters.status : [])
+        .equalsAny('type', this.filters.types ? this.filters.types : [])
+        .filter('failed', (failed) => this.showHidden ? true : !failed)
+    },
     tableNodes () {
-      return this.showHidden ? this.nodes : this.nodes.filter(n => !n.failed)
+      return this.filteredNodes.nodes
+    },
+    locations () {
+      return this.nodeCollection.values('loc')
+    },
+    states () {
+      return this.nodeCollection.values('status')
+    },
+    types () {
+      return this.nodeCollection.values('type')
     },
     hassDevices () {
       var devices = []
@@ -724,6 +800,7 @@ export default {
       nodes: [],
       scenes: [],
       debug: [],
+      filters: {},
       homeid: '',
       homeHex: '',
       ozwVersion: '',

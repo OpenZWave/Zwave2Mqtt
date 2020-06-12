@@ -33,7 +33,7 @@ export class NodeCollection {
   }
 
   equalsAny (properties, values) {
-    return this.filter(properties, (nodeValue) => values.indexOf(nodeValue) >= 0)
+    return this.filter(properties, (nodeValue) => values.length === 0 || values.indexOf(nodeValue) >= 0)
   }
 
   values (property) {
@@ -45,3 +45,5 @@ export class NodeCollection {
     return Object.keys(uniqueMap).sort().map(key => uniqueMap[key])
   }
 }
+
+export default NodeCollection
