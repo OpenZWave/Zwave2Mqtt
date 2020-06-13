@@ -9,7 +9,7 @@ describe('NodeCollection', () => {
     })
   })
   describe('#filter', () => {
-    const isOdd = (num) => num % 2
+    const isOdd = num => num % 2
     it('returns nodes with the property matching the filter', () => {
       const collection = new NodeCollection([
         { id: 1 },
@@ -18,10 +18,7 @@ describe('NodeCollection', () => {
         { id: 4 }
       ])
       const filtered = collection.filter('id', isOdd)
-      chai.expect(filtered.nodes).to.eql([
-        { id: 1 },
-        { id: 3 }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 1 }, { id: 3 }])
     })
     it('returns nodes with any of the properties matching the filter', () => {
       const collection = new NodeCollection([
@@ -54,10 +51,7 @@ describe('NodeCollection', () => {
         { id: '300' }
       ])
       const filtered = collection.contains('id', '10')
-      chai.expect(filtered.nodes).to.eql([
-        { id: 100 },
-        { id: '210' }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 100 }, { id: '210' }])
     })
     it('matches values over multiple properties', () => {
       const collection = new NodeCollection([
@@ -75,16 +69,11 @@ describe('NodeCollection', () => {
     })
     it('is case insensitive by default', () => {
       const filtered = stringCollection.contains('id', 'piPPo')
-      chai.expect(filtered.nodes).to.eql([
-        { id: 'pippo' },
-        { id: 'PipPo' }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 'pippo' }, { id: 'PipPo' }])
     })
     it('accepts a case sensitive flag', () => {
       const filtered = stringCollection.contains('id', 'PipPo', true)
-      chai.expect(filtered.nodes).to.eql([
-        { id: 'PipPo' }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 'PipPo' }])
     })
   })
   describe('#equals', () => {
@@ -96,9 +85,7 @@ describe('NodeCollection', () => {
         { id: '20' }
       ])
       const filtered = collection.equals('id', 10)
-      chai.expect(filtered.nodes).to.eql([
-        { id: 10 }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 10 }])
     })
     it('works over multiple properties', () => {
       const collection = new NodeCollection([
@@ -123,12 +110,9 @@ describe('NodeCollection', () => {
         { id: '20' }
       ])
       const filtered = collection.equalsAny('id', [])
-      chai.expect(filtered.nodes).to.eql([
-        { id: 10 },
-        { id: '10' },
-        { id: 20 },
-        { id: '20' }
-      ])
+      chai
+        .expect(filtered.nodes)
+        .to.eql([{ id: 10 }, { id: '10' }, { id: 20 }, { id: '20' }])
     })
     it('returns nodes with the properties equal to any of the values', () => {
       const collection = new NodeCollection([
@@ -138,10 +122,7 @@ describe('NodeCollection', () => {
         { id: '20' }
       ])
       const filtered = collection.equalsAny('id', [10, '20'])
-      chai.expect(filtered.nodes).to.eql([
-        { id: 10 },
-        { id: '20' }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 10 }, { id: '20' }])
     })
     it('works over multiple properties', () => {
       const collection = new NodeCollection([
@@ -168,11 +149,7 @@ describe('NodeCollection', () => {
         { name: 'giacomo' },
         { name: 10 }
       ])
-      chai.expect(collection.values('name')).to.eql([
-        10,
-        'Birretta',
-        'Giacomo'
-      ])
+      chai.expect(collection.values('name')).to.eql([10, 'Birretta', 'Giacomo'])
     })
   })
 })

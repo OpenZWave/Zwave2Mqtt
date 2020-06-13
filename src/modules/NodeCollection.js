@@ -4,45 +4,56 @@ export class NodeCollection {
   }
 
   _strValue (str, caseSensitive) {
-    return caseSensitive
-      ? `${str}`
-      : `${str}`.toLowerCase()
+    return caseSensitive ? `${str}` : `${str}`.toLowerCase()
   }
 
   _createStringFilter (filterValue, caseSensitive) {
     const strFilter = this._strValue(filterValue, caseSensitive)
-    return (value) => this._strValue(value, caseSensitive).indexOf(strFilter) >= 0
+    return value => this._strValue(value, caseSensitive).indexOf(strFilter) >= 0
   }
 
   _filterByProps (node, properties, filter) {
-    const mergedProps = [properties].reduce((merged, prop) => merged.concat(prop), [])
-    return mergedProps.find((prop) => filter(node[prop]))
+    const mergedProps = [properties].reduce(
+      (merged, prop) => merged.concat(prop),
+      []
+    )
+    return mergedProps.find(prop => filter(node[prop]))
   }
 
   filter (properties, filter) {
-    const filtered = this.nodes.filter((node) => this._filterByProps(node, properties, filter))
+    const filtered = this.nodes.filter(node =>
+      this._filterByProps(node, properties, filter)
+    )
     return new NodeCollection(filtered)
   }
 
   contains (properties, value, caseSensitive = false) {
-    return this.filter(properties, this._createStringFilter(value, caseSensitive))
+    return this.filter(
+      properties,
+      this._createStringFilter(value, caseSensitive)
+    )
   }
 
   equals (properties, value) {
-    return this.filter(properties, (nodeValue) => value === nodeValue)
+    return this.filter(properties, nodeValue => value === nodeValue)
   }
 
   equalsAny (properties, values) {
-    return this.filter(properties, (nodeValue) => values.length === 0 || values.indexOf(nodeValue) >= 0)
+    return this.filter(
+      properties,
+      nodeValue => values.length === 0 || values.indexOf(nodeValue) >= 0
+    )
   }
 
   values (property) {
     const uniqueMap = {}
-    this.nodes.forEach((node) => {
+    this.nodes.forEach(node => {
       const strVal = this._strValue(node[property])
       uniqueMap[strVal] = uniqueMap[strVal] || node[property]
     })
-    return Object.keys(uniqueMap).sort().map(key => uniqueMap[key])
+    return Object.keys(uniqueMap)
+      .sort()
+      .map(key => uniqueMap[key])
   }
 }
 

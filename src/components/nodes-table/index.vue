@@ -10,20 +10,49 @@
       <tr>
         <td></td>
         <td class="td-small">
-          <v-select v-model="filters.types" :items="types" clearable chips dense multiple></v-select>
+          <v-select
+            v-model="filters.types"
+            :items="types"
+            clearable
+            chips
+            dense
+            multiple
+          ></v-select>
         </td>
         <td>
-          <v-text-field v-model="filters.product" type="text" label="Product Name"></v-text-field>
+          <v-text-field
+            v-model="filters.product"
+            type="text"
+            label="Product Name"
+          ></v-text-field>
         </td>
         <td>
-          <v-text-field v-model="filters.name" type="text" label="Name"></v-text-field>
+          <v-text-field
+            v-model="filters.name"
+            type="text"
+            label="Name"
+          ></v-text-field>
         </td>
         <td>
-          <v-select v-model="filters.locations" :items="locations" clearable chips dense multiple></v-select>
+          <v-select
+            v-model="filters.locations"
+            :items="locations"
+            clearable
+            chips
+            dense
+            multiple
+          ></v-select>
         </td>
         <td></td>
         <td class="td-medium">
-          <v-select v-model="filters.status" :items="states" clearable chips dense multiple></v-select>
+          <v-select
+            v-model="filters.status"
+            :items="states"
+            clearable
+            chips
+            dense
+            multiple
+          ></v-select>
         </td>
         <td></td>
       </tr>
@@ -31,26 +60,26 @@
     <template v-slot:item="{ item }">
       <tr
         :style="{
-                cursor: 'pointer',
-                background:
-                  selectedNode === item
-                    ? $vuetify.theme.themes.light.accent
-                    : 'none'
-              }"
+          cursor: 'pointer',
+          background:
+            selectedNode === item ? $vuetify.theme.themes.light.accent : 'none'
+        }"
         @click.stop="nodeSelected(item)"
       >
         <td>{{ item.node_id }}</td>
         <td class="td-large">{{ item.type }}</td>
-        <td class="td-large" :title="productName(item)">{{productName(item)}}</td>
+        <td class="td-large" :title="productName(item)">
+          {{ productName(item) }}
+        </td>
         <td>{{ item.name || '' }}</td>
         <td>{{ item.loc || '' }}</td>
         <td>{{ item.secure ? 'Yes' : 'No' }}</td>
         <td class="td-medium">{{ item.status }}</td>
         <td>
           {{
-          item.lastActive
-          ? new Date(item.lastActive).toLocaleString()
-          : 'Never'
+            item.lastActive
+              ? new Date(item.lastActive).toLocaleString()
+              : 'Never'
           }}
         </td>
       </tr>

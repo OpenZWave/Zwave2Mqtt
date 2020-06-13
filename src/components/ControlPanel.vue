@@ -74,7 +74,7 @@
             <v-switch label="Show hidden nodes" v-model="showHidden"></v-switch>
           </v-flex>
         </v-layout>
-        <nodes-table :nodes="nodes" v-on:node-selected="selectNode"/>
+        <nodes-table :nodes="nodes" v-on:node-selected="selectNode" />
         <v-tabs style="margin-top:10px" v-model="currentTab" fixed-tabs>
           <v-tab key="node">Node</v-tab>
           <v-tab key="groups">Groups</v-tab>
@@ -563,9 +563,7 @@
   </v-container>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
 <script>
 import ConfigApis from '@/apis/ConfigApis'
