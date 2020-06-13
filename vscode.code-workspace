@@ -8,5 +8,8 @@
       "name": "Client",
       "path": "src"
     }
-  ]
+  ],
+  "settings": {
+    "workbench.editor.labelFormat": "short"
+  }
 }
