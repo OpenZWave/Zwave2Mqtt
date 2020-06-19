@@ -125,7 +125,7 @@ kubectl apply -k https://raw.githubusercontent.com/openzwave/zwave2mqtt/master/k
    sudo apt-get install libudev-dev
    cd ~
    git clone https://github.com/OpenZWave/open-zwave.git
-   cd openzwave && make && sudo make install
+   cd openz-wave && make && sudo make install
    sudo ldconfig
    export LD_LIBRARY_PATH=/usr/local/lib64
    sudo sed -i '$a LD_LIBRARY_PATH=/usr/local/lib64' /etc/environment
