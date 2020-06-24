@@ -117,7 +117,7 @@
     "vue": "^2.6.11",
     "vue-d3-network": "^0.1.28",
     "vue-router": "^3.3.2",
-    "vuetify": "^2.2.33",
+    "vuetify": "^2.3.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
