@@ -28,7 +28,9 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="subtitle-2 font-weight-bold">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="subtitle-2 font-weight-bold">{{
+              item.title
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item v-if="!mini">
