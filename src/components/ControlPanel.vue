@@ -1437,7 +1437,12 @@ export default {
       if (data.success) {
         switch (data.api) {
           case 'getAssociationsInstances':
-            data.result = data.result.map(a => `- Node: ${(self.nodes[a.nodeid]._name || a)} Instance: ${a.instance}`)
+            data.result = data.result.map(
+              a =>
+                `- Node: ${self.nodes[a.nodeid]._name || a} Instance: ${
+                  a.instance
+                }`
+            )
             self.$set(self.group, 'associations', data.result.join('\n'))
             break
           case '_getScenes':
