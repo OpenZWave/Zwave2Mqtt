@@ -1,15 +1,15 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: daily
 
-- package-ecosystem: "npm"
-  directory: "/"
-  schedule:
-    interval: "daily"
-  allow:
-    dependency-type: "dev-dependencies"
-  labels:
-    - "dev-dependencies"
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      dependency-type: 'dev-dependencies'
+    labels:
+      - 'dev-dependencies'
