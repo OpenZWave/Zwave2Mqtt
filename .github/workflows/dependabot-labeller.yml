@@ -1,0 +1,21 @@
+name: super-labeler-action
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - closed
+      - reopened
+      - ready_for_review
+      - synchronize
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    name: Label pull requests
+    steps:
+      - uses: actions/checkout@v2
+      - uses: IvanFon/super-labeler-action@v1
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'

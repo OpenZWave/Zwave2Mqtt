@@ -1,0 +1,24 @@
+{
+  "labels": {
+    "example": {
+      "name": "dev-dependencies",
+      "colour": "#00ff00",
+      "description": "Development dependencies"
+    }
+  },
+  "pr": {
+    "dev-dependencies": {
+      "requires": 2,
+      "conditions": [
+        {
+          "type": "creatorMatches",
+          "value": "dependabot[bot]"
+        },
+        {
+          "type": "titleMatches",
+          "pattern": "/^chore\\(deps-dev\\):/i"
+        }
+      ]
+    }
+  }
+}

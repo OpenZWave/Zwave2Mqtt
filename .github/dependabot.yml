@@ -4,12 +4,3 @@ updates:
     directory: '/'
     schedule:
       interval: daily
-
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'daily'
-    allow:
-      dependency-type: 'dev-dependencies'
-    labels:
-      - 'dev-dependencies'
