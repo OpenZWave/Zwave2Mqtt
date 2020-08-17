@@ -115,7 +115,9 @@ export default {
     },
     changeThemeColor: function () {
       var metaThemeColor = document.querySelector('meta[name=theme-color]')
-      var metaThemeColor2 = document.querySelector('meta[name=msapplication-TileColor]')
+      var metaThemeColor2 = document.querySelector(
+        'meta[name=msapplication-TileColor]'
+      )
 
       metaThemeColor.setAttribute('content', this.dark ? '#000' : '#fff')
       metaThemeColor2.setAttribute('content', this.dark ? '#000' : '#fff')
