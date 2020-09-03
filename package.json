@@ -108,7 +108,7 @@
     "native-url": "^0.3.4",
     "nedb": "^1.8.0",
     "openzwave-shared": "^1.7.1",
-    "serialport": "^9.0.0",
+    "serialport": "^9.0.1",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
@@ -117,7 +117,7 @@
     "vue": "^2.6.11",
     "vue-d3-network": "^0.1.28",
     "vue-router": "^3.3.4",
-    "vuetify": "^2.3.4",
+    "vuetify": "^2.3.5",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
