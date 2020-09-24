@@ -357,6 +357,8 @@ The Gateway values table can be used with all gateway types to customize specifi
 - **Post operation**: If you want to convert your value (eg. '/10' '/100' '*10' '*100')
 - **Poll**: Enable this to set the value `enablePoll` flag
 - **Verify Changes**: Used to verify changes of this values
+- **Parse Send**: Enable this to allow users to specify a custom `function(value)` to parse the value sent to MQTT
+- **Parse receive**: Enable this to allow users to specify a custom `function(value)` to parse the value received via MQTT
 
 ## :file_folder: Nodes Management
 
