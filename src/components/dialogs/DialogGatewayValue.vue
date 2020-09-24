@@ -115,7 +115,7 @@
                 ></v-switch>
               </v-flex>
 
-               <v-flex xs6>
+              <v-flex xs6>
                 <v-switch
                   label="Parse send"
                   hint="Create a function that parse the value sent via MQTT"
@@ -125,25 +125,41 @@
               </v-flex>
 
               <v-container v-if="editedValue.parseSend">
-              <br>
-              <p>Write the function here. Args are <code>value</code>. The function must return the parsed <code>value</code></p>
-              <prism-editor lineNumbers v-model="editedValue.sendFunction" language="js" :highlight="highlighter"></prism-editor>
-            </v-container>
+                <br />
+                <p>
+                  Write the function here. Args are <code>value</code>. The
+                  function must return the parsed <code>value</code>
+                </p>
+                <prism-editor
+                  lineNumbers
+                  v-model="editedValue.sendFunction"
+                  language="js"
+                  :highlight="highlighter"
+                ></prism-editor>
+              </v-container>
 
-            <v-flex xs6>
+              <v-flex xs6>
                 <v-switch
                   label="Parse receive"
                   hint="Create a function that parse the received value from MQTT"
                   persistent-hint
                   v-model="editedValue.parseReceive"
                 ></v-switch>
-            </v-flex>
+              </v-flex>
 
-            <v-container v-if="editedValue.parseReceive">
-              <br>
-              <p>Write the function here. Args are <code>value</code>. The function must return the parsed <code>value</code></p>
-              <prism-editor lineNumbers v-model="editedValue.receiveFunction" language="js" :highlight="highlighter"></prism-editor>
-            </v-container>
+              <v-container v-if="editedValue.parseReceive">
+                <br />
+                <p>
+                  Write the function here. Args are <code>value</code>. The
+                  function must return the parsed <code>value</code>
+                </p>
+                <prism-editor
+                  lineNumbers
+                  v-model="editedValue.receiveFunction"
+                  language="js"
+                  :highlight="highlighter"
+                ></prism-editor>
+              </v-container>
             </v-layout>
           </v-form>
         </v-container>
@@ -164,7 +180,6 @@
 </template>
 
 <script>
-
 // import Prism Editor
 import { PrismEditor } from 'vue-prism-editor'
 import 'vue-prism-editor/dist/prismeditor.min.css' // import the styles somewhere
@@ -275,8 +290,8 @@ export default {
 </script>
 
 <style>
-  /* optional class for removing the outline */
-  .prism-editor__textarea:focus {
-    outline: none;
-  }
+/* optional class for removing the outline */
+.prism-editor__textarea:focus {
+  outline: none;
+}
 </style>
