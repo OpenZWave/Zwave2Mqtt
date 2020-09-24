@@ -125,7 +125,6 @@
               </v-flex>
 
               <v-container v-if="editedValue.parseSend">
-                <br />
                 <p>
                   Write the function here. Args are <code>value</code>. The
                   function must return the parsed <code>value</code>
@@ -148,7 +147,6 @@
               </v-flex>
 
               <v-container v-if="editedValue.parseReceive">
-                <br />
                 <p>
                   Write the function here. Args are <code>value</code>. The
                   function must return the parsed <code>value</code>
