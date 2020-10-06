@@ -18,3 +18,4 @@ updates:
       - dependency-type: 'development'
     labels:
       - 'dev-dependencies'
+      - 'automerge'
