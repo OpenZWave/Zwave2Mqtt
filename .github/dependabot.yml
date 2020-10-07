@@ -20,14 +20,14 @@ updates:
       - 'dev-dependencies'
       - 'automerge'
 
-  - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/docker"
+  - package-ecosystem: 'docker' # See documentation for possible values
+    directory: '/docker'
     schedule:
-      interval: "daily"
+      interval: 'daily'
     labels:
-      - "automerge"
+      - 'automerge'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "daily"
+      interval: 'daily'
