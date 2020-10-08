@@ -16,16 +16,23 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          echo foo >> ./TAGS
-          echo bar >> ./TAGS
+          DOCKER_REPO=robertslando/zwave2mqtt
+          echo ${DOCKER_REPO}:sha-${GITHUB_SHA} > ./TAGS
 
-          TAGS=$(cat TAGS)
+          if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+            echo "${DOCKER_REPO}:dev" >> ./TAGS
+          fi
+          if [ "$GITHUB_EVENT_NAME" == "release" ]; then
+            echo "${DOCKER_REPO}:latest" >> ./TAGS
+            echo "${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//")\n") >> ./TAGS
+          fi
+
+          TAGS=$(cat TAGS)"
           TAGS="${TAGS//'%'/'%25'}"
           TAGS="${TAGS//$'\n'/'%0A'}"
           TAGS="${TAGS//$'\r'/'%0D'}"
-          # echo TAGS=$TAGS >> $GITHUB_ENV
-
           echo ::set-output name=TAGS::${TAGS}
+          echo DOCKER_REPO="${DOCKER_REPO}" >> $GITHUB_ENV
 
       - uses: docker/setup-buildx-action@v1
       - uses: docker/setup-qemu-action@v1
