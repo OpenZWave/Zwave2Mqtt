@@ -20,11 +20,11 @@ jobs:
           echo ${DOCKER_REPO}:sha-${GITHUB_SHA} > ./TAGS
 
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-            echo "${DOCKER_REPO}:dev" >> ./TAGS
+            echo ${DOCKER_REPO}:dev >> ./TAGS
           fi
           if [ "$GITHUB_EVENT_NAME" == "release" ]; then
-            echo "${DOCKER_REPO}:latest" >> ./TAGS
-            echo "${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//")\n") >> ./TAGS
+            echo ${DOCKER_REPO}:latest >> ./TAGS
+            echo ${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//")\n") >> ./TAGS
           fi
 
           TAGS=$(cat TAGS)"
