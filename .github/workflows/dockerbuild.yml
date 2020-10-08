@@ -2,12 +2,12 @@ name: Docker Build
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-  release:
-    types:
-      - created
+  #   branches:
+  #     - master
+  # pull_request:
+  # release:
+  #   types:
+  #     - created
 
 jobs:
   build:
@@ -16,14 +16,18 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          echo foo > ./TAGS
-          echo bar > ./TAGS
+          echo foo >> ./TAGS
+          echo bar >> ./TAGS
 
           TAGS=$(cat TAGS)
           TAGS="${TAGS//'%'/'%25'}"
           TAGS="${TAGS//$'\n'/'%0A'}"
           TAGS="${TAGS//$'\r'/'%0D'}"
-          echo TAGS=$TAGS >> $GITHUB_ENV
+          # echo TAGS=$TAGS >> $GITHUB_ENV
+
+          echo ::set-output name=TAGS::${TAGS}
 
       - run: |
-          echo $TAGS
+          echo start
+          echo ${{ steps.prepare.outputs.TAGS }}
+          echo end
