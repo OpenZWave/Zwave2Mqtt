@@ -27,7 +27,7 @@ jobs:
             echo ${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//")\n") >> ./TAGS
           fi
 
-          TAGS=$(cat TAGS)"
+          TAGS=$(cat TAGS)
           TAGS="${TAGS//'%'/'%25'}"
           TAGS="${TAGS//$'\n'/'%0A'}"
           TAGS="${TAGS//$'\r'/'%0D'}"
