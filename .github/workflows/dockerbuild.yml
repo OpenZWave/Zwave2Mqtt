@@ -27,11 +27,6 @@ jobs:
 
           echo ::set-output name=TAGS::${TAGS}
 
-      - run: |
-          echo start
-          echo ${{ steps.prepare.outputs.TAGS }}
-          echo end
-
       - uses: docker/setup-buildx-action@v1
       - uses: docker/setup-qemu-action@v1
 
