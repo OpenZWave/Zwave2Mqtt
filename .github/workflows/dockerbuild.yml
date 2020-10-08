@@ -24,9 +24,6 @@ jobs:
           TAGS="${TAGS//$'\n'/'%0A'}"
           TAGS="${TAGS//$'\r'/'%0D'}"
           echo TAGS=$TAGS >> $GITHUB_ENV
-          echo "::set-output name=TAGS::${$TAGS}"
 
       - run: |
-          echo ${{ steps.prepare.outputs.TAGS }}
-          echo next
           echo $TAGS
