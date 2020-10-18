@@ -1015,6 +1015,72 @@ export default {
 
       return match[0] !== name ? 'Only a-zA-Z0-9_- chars are allowed' : null
     },
+    filterNodesByList (value, search, item, list) {
+      // Exclude not contained in selected list elements:
+      if (list !== null &&
+            list.length > 0 &&
+            !list.includes(value)
+      ) return false
+      return true
+    },
+    filterNodesStringCol (value, search, item, header) {
+      if (
+        header.search !== undefined &&
+        header.search !== null &&
+        typeof value === 'string') {
+          let i = value.toString().toLocaleLowerCase().indexOf(header.search.toLocaleLowerCase())
+          if (i === -1) return false
+      }
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodesNumberCol (value, search, item, header) {
+      let fi = header.filterInfo
+      if (
+        fi.min !== undefined &&
+        fi.min !== null &&
+        typeof value === 'number' &&
+        value < parseInt(fi.min)
+      ) return false
+      if (
+        fi.max !== undefined &&
+        fi.max !== null &&
+        typeof value === 'number' &&
+        value > parseInt(fi.max)
+      ) return false
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodesDateCol (value, search, item, header) {
+      return true
+      let fi = header.filterInfo
+      if (
+        fi.min !== undefined &&
+        fi.min !== null &&
+        typeof value === 'date' &&
+        value < new Date(fi.min)
+      ) return false
+      if (
+        fi.max !== undefined &&
+        fi.max !== null &&
+        typeof value === 'date' &&
+        value > new Date(fi.max)
+      ) return false
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodeCols () {
+      return {
+        'node_id': (value, search, item) => this.filterNodesNumberCol(value, search, item, this.headers[0]),
+        'type': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[1]),
+        'product': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[2]),
+        'name': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[3]),
+        'loc': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[4]),
+        'secure': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[5]),
+        'status': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[6]),
+        'lastActive': (value, search, item) => this.filterNodesDateCol(value, search, item, this.headers[7]),
+      }
+    },
     selectNode (item) {
       if (!item) return
 
