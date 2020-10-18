@@ -15,21 +15,16 @@
     <v-card>
       <v-card-text>
         <v-text-field ref="search" v-if="header.filterInfo.type=='string'" label="Contains" v-model="header.search" @change="showFilterOptions=false" @show="$refs.search.$el.focus()"></v-text-field>
-        <v-row>
+        <v-row v-if="header.filterInfo.type=='number' || header.filterInfo.type=='date'">
           <v-col>
             <v-text-field v-if="header.filterInfo.type=='number'" type="number" label="Min" v-model="header.filterInfo.min"></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field v-if="header.filterInfo.type=='number'" type="number" label="Max" v-model="header.filterInfo.max"></v-text-field>
-          </v-col>
-          <v-col>
             <v-text-field v-if="header.filterInfo.type=='date'" type="datetime-local" label="Min" v-model="header.filterInfo.min"></v-text-field>
           </v-col>
           <v-col>
+            <v-text-field v-if="header.filterInfo.type=='number'" type="number" label="Max" v-model="header.filterInfo.max"></v-text-field>
             <v-text-field v-if="header.filterInfo.type=='date'" type="datetime-local" label="Max" v-model="header.filterInfo.max"></v-text-field>
           </v-col>
         </v-row>
-        Items
         <v-item-group multiple v-model="header.filterInfo.list">
           <v-item
             v-for="item in nodeColumnValueList(header)"
