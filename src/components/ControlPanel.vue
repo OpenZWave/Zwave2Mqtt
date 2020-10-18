@@ -79,11 +79,62 @@
           :headers="headers"
           :items="tableNodes"
           :footer-props="{
-            itemsPerPageOptions: [10, 20, { text: 'All', value: -1 }]
+            itemsPerPageOptions: [10, 20, 50, 100, -1]
+          }"
+          :options="{
+            itemsPerPage: 100
           }"
           item-key="node_id"
           class="elevation-1"
         >
+          <template v-slot:header.type="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
+          <template v-slot:header.product="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
+          <template v-slot:header.name="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
+          <template v-slot:header.loc="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
+          <template v-slot:header.secure="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
+          <template v-slot:header.status="{ header }">
+            <table-col-filter
+              :data="tableNodes"
+              :headers="headers"
+              :header="header"
+            ></table-col-filter>
+            {{ header.text }}
+          </template>
           <template v-slot:item="{ item }">
             <tr
               :style="{
@@ -615,6 +666,7 @@ import Confirm from '@/components/Confirm'
 
 import AnsiUp from 'ansi_up'
 
+import tableColFilter from '@/components/custom/table-col-filter.vue'
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
 
 const ansiUp = new AnsiUp()
@@ -631,7 +683,8 @@ export default {
   components: {
     ValueID,
     DialogSceneValue,
-    Confirm
+    Confirm,
+    tableColFilter
   },
   computed: {
     scenesWithId () {
@@ -878,14 +931,14 @@ export default {
       newLoc: '',
       selectedNode: null,
       headers: [
-        { text: 'ID', value: 'node_id' },
-        { text: 'Type', value: 'type' },
-        { text: 'Product', value: 'product' },
-        { text: 'Name', value: 'name' },
-        { text: 'Location', value: 'loc' },
-        { text: 'Secure', value: 'secure' },
-        { text: 'Status', value: 'status' },
-        { text: 'Last Active', value: 'lastActive' }
+        { text: 'ID', value: 'node_id', filter: this.filterNodeCols()['node_id'], filterInfo: { type: 'number', list: [], min: null, max: null } },
+        { text: 'Type', value: 'type', filter: this.filterNodeCols()['type'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Product', value: 'product', filter: this.filterNodeCols()['product'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Name', value: 'name', filter: this.filterNodeCols()['name'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Location', value: 'loc', filter: this.filterNodeCols()['loc'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Secure', value: 'secure', filter: this.filterNodeCols()['secure'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Status', value: 'status', filter: this.filterNodeCols()['status'], filterInfo: { type: 'string', list: [] } },
+        { text: 'Last Active', value: 'lastActive', filter: this.filterNodeCols()['lastActive'], filterInfo: { type: 'date', from: null, to: null } }
       ],
       rules: {
         required: value => {
@@ -902,6 +955,72 @@ export default {
   methods: {
     showSnackbar (text) {
       this.$emit('showSnackbar', text)
+    },
+    filterNodesByList (value, search, item, list) {
+      // Exclude not contained in selected list elements:
+      if (list !== null &&
+            list.length > 0 &&
+            !list.includes(value)
+      ) return false
+      return true
+    },
+    filterNodesStringCol (value, search, item, header) {
+      if (
+        header.search !== undefined &&
+        header.search !== null &&
+        typeof value === 'string') {
+          let i = value.toString().toLocaleLowerCase().indexOf(header.search.toLocaleLowerCase())
+          if (i === -1) return false
+      }
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodesNumberCol (value, search, item, header) {
+      let fi = header.filterInfo
+      if (
+        fi.min !== undefined &&
+        fi.min !== null &&
+        typeof value === 'number' &&
+        value < parseInt(fi.min)
+      ) return false
+      if (
+        fi.max !== undefined &&
+        fi.max !== null &&
+        typeof value === 'number' &&
+        value > parseInt(fi.max)
+      ) return false
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodesDateCol (value, search, item, header) {
+      return true
+      let fi = header.filterInfo
+      if (
+        fi.min !== undefined &&
+        fi.min !== null &&
+        typeof value === 'date' &&
+        value < new Date(fi.min)
+      ) return false
+      if (
+        fi.max !== undefined &&
+        fi.max !== null &&
+        typeof value === 'date' &&
+        value > new Date(fi.max)
+      ) return false
+      if (!this.filterNodesByList(value, search, item, header.filterInfo.list)) return false
+      return true
+    },
+    filterNodeCols () {
+      return {
+        'node_id': (value, search, item) => this.filterNodesNumberCol(value, search, item, this.headers[0]),
+        'type': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[1]),
+        'product': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[2]),
+        'name': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[3]),
+        'loc': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[4]),
+        'secure': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[5]),
+        'status': (value, search, item) => this.filterNodesStringCol(value, search, item, this.headers[6]),
+        'lastActive': (value, search, item) => this.filterNodesDateCol(value, search, item, this.headers[7]),
+      }
     },
     selectNode (item) {
       if (!item) return
