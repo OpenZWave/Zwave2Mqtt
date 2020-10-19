@@ -993,7 +993,6 @@ export default {
       return true
     },
     filterNodesDateCol (value, search, item, header) {
-      return true
       let fi = header.filterInfo
       if (
         fi.min !== undefined &&
