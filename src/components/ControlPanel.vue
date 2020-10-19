@@ -295,10 +295,7 @@
                         @click="storeDevices(true)"
                         >Remove Store</v-btn
                       >
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        @click="rediscoverNode"
+                      <v-btn color="green darken-1" text @click="rediscoverNode"
                         >Rediscover Node</v-btn
                       >
                       <v-btn
