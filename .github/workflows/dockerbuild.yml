@@ -25,26 +25,27 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Prepare
+        id: prepare
         run: |
           DOCKER_REPO=robertslando/zwave2mqtt
+          TAGS=${DOCKER_REPO}:sha-${GITHUB_SHA}
+
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-            TAGS="${DOCKER_REPO}:dev\n"
+            TAGS=$TAGS,${DOCKER_REPO}:dev
           fi
           if [ "$GITHUB_EVENT_NAME" == "release" ]; then
-            TAGS="${TAGS}${DOCKER_REPO}:latest\n"
-            TAGS="${TAGS}${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//")\n"
+            TAGS=$TAGS,${DOCKER_REPO}:latest
+            TAGS=$TAGS,${DOCKER_REPO}:$(echo ${GITHUB_REF} | sed "s/refs\/tags\/v//") >> ./TAGS
           fi
 
-          TAGS="${TAGS}${DOCKER_REPO}:sha-${GITHUB_SHA}"
-
-          echo TAGS="${TAGS}" >> $GITHUB_ENV
+          echo ::set-output name=TAGS::${TAGS}
           echo DOCKER_REPO="${DOCKER_REPO}" >> $GITHUB_ENV
 
       - name: build+push
         uses: docker/build-push-action@v2
         with:
           cache-from: type=registry,ref=${{ env.DOCKER_REPO }}:sha-${{ env.GITHUB_SHA }}
-          platforms: linux/arm64,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386
+          platforms: linux/arm64,linux/amd64,linux/arm/v6,linux/arm/v7
           file: docker/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.TAGS }}
+          tags: ${{ steps.prepare.outputs.TAGS }}
