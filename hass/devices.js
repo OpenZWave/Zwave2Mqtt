@@ -104,6 +104,51 @@ const SPIRIT_ZWAVE_PLUS = {
   }
 }
 
+const SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT = {
+  type: 'sensor',
+  object_id: 'target_temperature_heat',
+  discovery_payload: {
+    value_template: '{{ value_json.value }}',
+    device_class: 'temperature',
+    unit_of_measurement: '°C',
+    state_topic: '67-1-1'
+  },
+  values: ['67-1-1']
+}
+const SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT_ECO = {
+  type: 'sensor',
+  object_id: 'target_temperature_heat_eco',
+  discovery_payload: {
+    value_template: '{{ value_json.value }}',
+    device_class: 'temperature',
+    unit_of_measurement: '°C',
+    state_topic: '67-1-11'
+  },
+  values: ['67-1-11']
+}
+
+const SPIRITZ_ZWAVE_PLUS_SENSOR_ROOM_TEMP = {
+  type: 'sensor',
+  object_id: 'room_temperature',
+  discovery_payload: {
+    value_template: '{{ value_json.value }}',
+    device_class: 'temperature',
+    unit_of_measurement: '°C',
+    state_topic: '49-1-1'
+  },
+  values: ['49-1-1']
+}
+
+const SPIRITZ_ZWAVE_PLUS_SENSOR_VALVE = {
+  type: 'sensor',
+  object_id: 'valve_position',
+  discovery_payload: {
+    value_template: '{{ value_json.value }}',
+    state_topic: '38-1-0'
+  },
+  values: ['38-1-0']
+}
+
 const DANFOSS_TRV_ZWAVE = {
   type: 'climate',
   object_id: 'thermostat',
@@ -341,9 +386,9 @@ module.exports = {
   '152-256-8194': [THERMOSTAT_2GIG], // Radio Thermostat / 2GIG CT32
   '271-4096-770': [COVER], // Fibaro FGS222
   '328-1-1': [STELLA_ZWAVE],
-  '328-1-3': [SPIRIT_ZWAVE_PLUS],
-  '328-2-3': [SPIRIT_ZWAVE_PLUS],
-  '328-3-3': [SPIRIT_ZWAVE_PLUS],
+  '328-1-3': [SPIRIT_ZWAVE_PLUS, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT_ECO, SPIRITZ_ZWAVE_PLUS_SENSOR_ROOM_TEMP, SPIRITZ_ZWAVE_PLUS_SENSOR_VALVE],
+  '328-2-3': [SPIRIT_ZWAVE_PLUS, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT_ECO, SPIRITZ_ZWAVE_PLUS_SENSOR_ROOM_TEMP, SPIRITZ_ZWAVE_PLUS_SENSOR_VALVE],
+  '328-3-3': [SPIRIT_ZWAVE_PLUS, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT, SPIRITZ_ZWAVE_PLUS_SENSOR_TARGET_HEAT_ECO, SPIRITZ_ZWAVE_PLUS_SENSOR_ROOM_TEMP, SPIRITZ_ZWAVE_PLUS_SENSOR_VALVE],
   '345-82-3': [COVER], // Qubino flush shutter
   '622-23089-17235': [COVER], // Graber/Bali/Spring Fashion Covers
   '881-21-2': [SPIRIT_ZWAVE_PLUS] // Eurotronic Spirit / Aeotec ZWA021
