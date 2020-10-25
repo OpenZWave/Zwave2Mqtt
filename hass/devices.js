@@ -87,8 +87,17 @@ const SPIRIT_ZWAVE_PLUS = {
   type: 'climate',
   object_id: 'thermostat',
   values: ['64-1-0', '49-1-1', '67-1-1', '67-1-11'],
-  mode_map: { off: 'Off', heat: 'Heat', cool: 'Heat Eco', drying: 'Full Power' },
-  setpoint_topic: { Heat: '67-1-1', 'Heat Eco': '67-1-11', 'Full Power': '67-1-1' },
+  mode_map: {
+    off: 'Off',
+    heat: 'Heat',
+    cool: 'Heat Eco',
+    drying: 'Full Power'
+  },
+  setpoint_topic: {
+    Heat: '67-1-1',
+    'Heat Eco': '67-1-11',
+    'Full Power': '67-1-1'
+  },
   default_setpoint: '67-1-1',
   discovery_payload: {
     min_temp: 8,
