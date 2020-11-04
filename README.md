@@ -122,6 +122,7 @@ kubectl apply -k https://raw.githubusercontent.com/OpenZWave/Zwave2Mqtt/master/k
 1. Firstly you need to install the [Open-Zwave](https://github.com/OpenZWave/open-zwave) library on your system.
 
    ```sh
+   sudo apt-get install -y git
    cd ~
    git clone https://github.com/OpenZWave/open-zwave.git
    cd open-zwave && make && sudo make install
