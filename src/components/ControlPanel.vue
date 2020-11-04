@@ -81,6 +81,7 @@
           :footer-props="{
             itemsPerPageOptions: [10, 20, { text: 'All', value: -1 }]
           }"
+          :items-per-page.sync="nodeTableItems"
           item-key="node_id"
           class="elevation-1"
         >
@@ -672,6 +673,9 @@ export default {
     }
   },
   watch: {
+    nodeTableItems (val) {
+      localStorage.setItem('nodes_itemsPerPage', val)
+    },
     dialogValue (val) {
       val || this.closeDialog()
     },
@@ -734,6 +738,7 @@ export default {
       debugActive: false,
       selectedScene: null,
       cnt_status: 'Unknown',
+      nodeTableItems: 10,
       newScene: '',
       scene_values: [],
       dialogValue: false,
@@ -1361,6 +1366,10 @@ export default {
   },
   mounted () {
     var self = this
+
+    const itemsPerPage = parseInt(localStorage.getItem('nodes_itemsPerPage'))
+
+    this.nodeTableItems = !isNaN(itemsPerPage) ? itemsPerPage : 10
 
     this.socket.on(this.socketEvents.controller, data => {
       self.cnt_status = data.help
