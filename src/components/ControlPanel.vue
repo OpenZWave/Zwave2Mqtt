@@ -75,50 +75,11 @@
           </v-flex>
         </v-layout>
 
-        <v-data-table
-          :headers="headers"
-          :items="tableNodes"
-          :footer-props="{
-            itemsPerPageOptions: [10, 20, { text: 'All', value: -1 }]
-          }"
-          :items-per-page.sync="nodeTableItems"
-          item-key="node_id"
-          class="elevation-1"
-        >
-          <template v-slot:item="{ item }">
-            <tr
-              :style="{
-                cursor: 'pointer',
-                background:
-                  selectedNode === item
-                    ? $vuetify.theme.themes.light.accent
-                    : 'none'
-              }"
-              @click.stop="selectNode(item)"
-            >
-              <td>{{ item.node_id }}</td>
-              <td>{{ item.type }}</td>
-              <td>
-                {{
-                  item.ready
-                    ? item.product + ' (' + item.manufacturer + ')'
-                    : ''
-                }}
-              </td>
-              <td>{{ item.name || '' }}</td>
-              <td>{{ item.loc || '' }}</td>
-              <td>{{ item.secure ? 'Yes' : 'No' }}</td>
-              <td>{{ item.status }}</td>
-              <td>
-                {{
-                  item.lastActive
-                    ? new Date(item.lastActive).toLocaleString()
-                    : 'Never'
-                }}
-              </td>
-            </tr>
-          </template>
-        </v-data-table>
+        <nodes-table
+          :nodes="nodes"
+          :showHidden="showHidden"
+          v-on:node-selected="selectNode"
+        />
 
         <v-tabs style="margin-top:10px" v-model="currentTab" fixed-tabs>
           <v-tab key="node">Node</v-tab>
@@ -614,6 +575,7 @@ import Confirm from '@/components/Confirm'
 import AnsiUp from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
+import NodesTable from '@/components/nodes-table'
 
 const ansiUp = new AnsiUp()
 
@@ -629,7 +591,8 @@ export default {
   components: {
     ValueID,
     DialogSceneValue,
-    Confirm
+    Confirm,
+    NodesTable
   },
   computed: {
     scenesWithId () {
@@ -640,9 +603,6 @@ export default {
     },
     dialogTitle () {
       return this.editedIndex === -1 ? 'New Value' : 'Edit Value'
-    },
-    tableNodes () {
-      return this.showHidden ? this.nodes : this.nodes.filter(n => !n.failed)
     },
     hassDevices () {
       var devices = []
@@ -721,6 +681,7 @@ export default {
       nodes: [],
       scenes: [],
       debug: [],
+      filters: {},
       homeid: '',
       homeHex: '',
       ozwVersion: '',
@@ -728,7 +689,6 @@ export default {
       debugActive: false,
       selectedScene: null,
       cnt_status: 'Unknown',
-      nodeTableItems: 10,
       newScene: '',
       scene_values: [],
       dialogValue: false,
@@ -869,16 +829,6 @@ export default {
       locError: null,
       newLoc: '',
       selectedNode: null,
-      headers: [
-        { text: 'ID', value: 'node_id' },
-        { text: 'Type', value: 'type' },
-        { text: 'Product', value: 'product' },
-        { text: 'Name', value: 'name' },
-        { text: 'Location', value: 'loc' },
-        { text: 'Secure', value: 'secure' },
-        { text: 'Status', value: 'status' },
-        { text: 'Last Active', value: 'lastActive' }
-      ],
       rules: {
         required: value => {
           var valid = false
@@ -902,13 +852,13 @@ export default {
 
       return match[0] !== name ? 'Only a-zA-Z0-9_- chars are allowed' : null
     },
-    selectNode (item) {
-      if (!item) return
+    selectNode ({ node }) {
+      if (!node) return
 
-      if (this.selectedNode === item) {
+      if (this.selectedNode === node) {
         this.selectedNode = null
       } else {
-        this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
+        this.selectedNode = this.nodes.find(n => n.node_id === node.node_id)
       }
     },
     getValue (v) {
