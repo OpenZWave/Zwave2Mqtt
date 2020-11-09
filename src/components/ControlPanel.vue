@@ -681,7 +681,6 @@ export default {
       nodes: [],
       scenes: [],
       debug: [],
-      filters: {},
       homeid: '',
       homeHex: '',
       ozwVersion: '',
