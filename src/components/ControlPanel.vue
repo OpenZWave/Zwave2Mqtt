@@ -689,6 +689,7 @@ export default {
       debugActive: false,
       selectedScene: null,
       cnt_status: 'Unknown',
+      nodeTableItems: 10,
       newScene: '',
       scene_values: [],
       dialogValue: false,
