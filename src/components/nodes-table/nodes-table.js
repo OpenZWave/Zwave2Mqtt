@@ -1,5 +1,3 @@
-'esversion: 6'
-
 import { NodeCollection } from '@/modules/NodeCollection'
 import filterOptions from '@/components/nodes-table/filter-options.vue'
 
