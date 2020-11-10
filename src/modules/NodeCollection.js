@@ -53,10 +53,11 @@ export class NodeCollection {
   }
 
   betweenDate (properties, minValue, maxValue) {
-    return this.filter(properties, nodeValue =>
-      (this._isUndefined(minValue) || new Date(minValue).getTime() <= nodeValue) &&
-      (this._isUndefined(maxValue) || new Date(maxValue).getTime() >= nodeValue)
-    )
+    return this.filter(properties, nodeValue => {
+      const nodeValueTime = new Date(nodeValue).getTime()
+      return (this._isUndefined(minValue) || new Date(minValue).getTime() <= nodeValueTime) &&
+        (this._isUndefined(maxValue) || new Date(maxValue).getTime() >= nodeValueTime)
+    })
   }
 
   equalsAny (properties, values) {
