@@ -3,12 +3,16 @@ export class NodeCollection {
     this.nodes = nodes
   }
 
+  _isUndefined (value) {
+    return value === undefined || value === null || value === ''
+  }
+
   _strValue (str, caseSensitive) {
     return caseSensitive ? `${str}` : `${str}`.toLowerCase()
   }
 
   _createStringFilter (filterValue, caseSensitive) {
-    if (filterValue === undefined || filterValue === null) {
+    if (this._isUndefined(filterValue)) {
       filterValue = ''
     }
     const strFilter = this._strValue(filterValue, caseSensitive)
@@ -43,15 +47,15 @@ export class NodeCollection {
 
   betweenNumber (properties, minValue, maxValue) {
     return this.filter(properties, nodeValue =>
-      (minValue === undefined || minValue === null || minValue === '' || minValue <= nodeValue) &&
-      (maxValue === undefined || maxValue === null || maxValue === '' || maxValue >= nodeValue)
+      (this._isUndefined(minValue) || minValue <= nodeValue) &&
+      (this._isUndefined(maxValue) || maxValue >= nodeValue)
     )
   }
 
   betweenDate (properties, minValue, maxValue) {
     return this.filter(properties, nodeValue =>
-      (minValue === undefined || minValue === null || minValue === '' || new Date(minValue) <= nodeValue) &&
-      (maxValue === undefined || maxValue === null || maxValue === '' || new Date(maxValue) >= nodeValue)
+      (this._isUndefined(minValue) || new Date(minValue).getTime() <= nodeValue) &&
+      (this._isUndefined(maxValue) || new Date(maxValue).getTime() >= nodeValue)
     )
   }
 
