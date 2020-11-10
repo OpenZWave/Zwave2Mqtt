@@ -1,4 +1,4 @@
-'esversion: 6';
+'esversion: 6'
 
 import { NodeCollection } from '@/modules/NodeCollection'
 import filterOptions from '@/components/nodes-table/filter-options.vue'
@@ -26,7 +26,7 @@ export default {
     ]
   }),
   methods: {
-    initFilters() {
+    initFilters () {
       return {
         ids: { type: 'number' },
         types: { type: 'string' },
@@ -38,7 +38,7 @@ export default {
         lastActives: { type: 'date' }
       }
     },
-    resetFilter() {
+    resetFilter () {
       this.filters = this.initFilters()
     },
     nodeSelected (node) {
@@ -57,13 +57,13 @@ export default {
     nodeCollection () {
       return new NodeCollection(this.nodes)
     },
-    relevantNodes() {
+    relevantNodes () {
       return this.nodeCollection
         .filter('failed', failed => {
           return (this.showHidden ? true : !failed)
         })
     },
-    filteredNodes() {
+    filteredNodes () {
       return this.relevantNodes
         .betweenNumber('node_id', this.filters.ids ? this.filters.ids.min : null, this.filters.ids ? this.filters.ids.max : null)
         .betweenDate('lastActive', this.filters.lastActives ? this.filters.lastActives.min : null, this.filters.lastActives ? this.filters.lastActives.max : null)
@@ -89,19 +89,19 @@ export default {
     tableNodes () {
       return this.filteredNodes.nodes
     },
-    ids() {
+    ids () {
       return this.relevantNodes.values('node_id')
     },
-    products() {
+    products () {
       return this.relevantNodes.values('product')
     },
-    names() {
+    names () {
       return this.relevantNodes.values('name')
     },
     locations () {
       return this.relevantNodes.values('loc')
     },
-    secures() {
+    secures () {
       return [undefined, false, true]
     },
     states () {
@@ -110,7 +110,7 @@ export default {
     types () {
       return this.relevantNodes.values('type')
     },
-    lastActives() {
+    lastActives () {
       return this.relevantNodes.values('lastActive')
     }
   }

@@ -69,31 +69,33 @@
 export default {
   props: {
     value: {
-      type: Object,
+      type: Object
     },
     items: {
-      type: Array,
+      type: Array
     }
   },
   data () {
     return {
-      show: false,
+      show: false
     }
   },
   computed: {
     hasFilter () {
       return this.value !== undefined && this.value !== null &&
-        ((this.value.search !== undefined && this.value.search !== null && this.value.search !== '')
-        || (this.value.selections !== undefined && this.value.selections !== null && this.value.selections.length > 0)
-        || (this.value.min !== undefined && this.value.min !== null)
-        || (this.value.max !== undefined && this.value.max !== null))
-    },
+        (
+          (this.value.search !== undefined && this.value.search !== null && this.value.search !== '') ||
+          (this.value.selections !== undefined && this.value.selections !== null && this.value.selections.length > 0) ||
+          (this.value.min !== undefined && this.value.min !== null) ||
+          (this.value.max !== undefined && this.value.max !== null)
+        )
+    }
   },
   methods: {
-    showOptions() {
+    showOptions () {
       this.show = true
     },
-    hideOptions() {
+    hideOptions () {
       this.show = false
     },
     clearFilter () {

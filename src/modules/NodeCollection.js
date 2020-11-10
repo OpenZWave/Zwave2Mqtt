@@ -41,17 +41,17 @@ export class NodeCollection {
     return this.filter(properties, nodeValue => value === nodeValue)
   }
 
-  betweenNumber(properties, minValue, maxValue) {
+  betweenNumber (properties, minValue, maxValue) {
     return this.filter(properties, nodeValue =>
-      (minValue === undefined || minValue === null || minValue === '' || minValue <= nodeValue)
-      && (maxValue === undefined || maxValue === null || maxValue === '' || maxValue >= nodeValue)
+      (minValue === undefined || minValue === null || minValue === '' || minValue <= nodeValue) &&
+      (maxValue === undefined || maxValue === null || maxValue === '' || maxValue >= nodeValue)
     )
   }
 
-  betweenDate(properties, minValue, maxValue) {
+  betweenDate (properties, minValue, maxValue) {
     return this.filter(properties, nodeValue =>
-      (minValue === undefined || minValue === null || minValue === '' || new Date(minValue) <= nodeValue)
-      && (maxValue === undefined || maxValue === null || maxValue === '' || new Date(maxValue) >= nodeValue)
+      (minValue === undefined || minValue === null || minValue === '' || new Date(minValue) <= nodeValue) &&
+      (maxValue === undefined || maxValue === null || maxValue === '' || new Date(maxValue) >= nodeValue)
     )
   }
 
