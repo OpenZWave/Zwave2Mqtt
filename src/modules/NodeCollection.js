@@ -42,7 +42,7 @@ export class NodeCollection {
   }
 
   equals (properties, value) {
-    return this.filter(properties, nodeValue => value === nodeValue)
+    return this.filter(properties, nodeValue => this._isUndefined(value) || value === nodeValue)
   }
 
   betweenNumber (properties, minValue, maxValue) {

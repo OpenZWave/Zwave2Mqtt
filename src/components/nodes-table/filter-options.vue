@@ -42,7 +42,7 @@
             <v-text-field type="datetime-local" label="Until" v-model="value.max" clearable></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="value && (value.type=='string' || value.type=='number' || value.type=='boolean')">
+        <v-row v-if="value && (value.type=='string' || value.type=='number')">
           <v-col>
             <v-select
               v-model="value.selections"
@@ -54,6 +54,11 @@
               dense
               multiple
             ></v-select>
+          </v-col>
+        </v-row>
+        <v-row v-if="value && value.type=='boolean'">
+          <v-col>
+            <v-checkbox :indeterminate="value.bool == undefined || value.bool == null" v-model="value.bool" label="Boolean value"></v-checkbox>
           </v-col>
         </v-row>
       </v-card-text>
@@ -87,7 +92,8 @@ export default {
           (this.value.search !== undefined && this.value.search !== null && this.value.search !== '') ||
           (this.value.selections !== undefined && this.value.selections !== null && this.value.selections.length > 0) ||
           (this.value.min !== undefined && this.value.min !== null) ||
-          (this.value.max !== undefined && this.value.max !== null)
+          (this.value.max !== undefined && this.value.max !== null) ||
+          (this.value.bool !== undefined && this.value.bool !== null)
         )
     }
   },
@@ -103,6 +109,7 @@ export default {
       this.value.selections = []
       this.value.min = null
       this.value.max = null
+      this.value.bool = null
     }
   }
 }
