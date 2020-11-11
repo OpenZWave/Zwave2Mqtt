@@ -10,6 +10,7 @@ export default {
     filterOptions
   },
   data: () => ({
+    nodeTableItems: 10,
     selectedNode: undefined,
     filters: {},
     headers: [
@@ -50,6 +51,13 @@ export default {
   },
   mounted () {
     this.filters = this.initFilters()
+    const itemsPerPage = parseInt(localStorage.getItem('nodes_itemsPerPage'))
+    this.nodeTableItems = !isNaN(itemsPerPage) ? itemsPerPage : 10
+  },
+  watch: {
+    nodeTableItems (val) {
+      localStorage.setItem('nodes_itemsPerPage', val)
+    }
   },
   computed: {
     nodeCollection () {

@@ -5,9 +5,7 @@
     :footer-props="{
       itemsPerPageOptions: [10, 20, 50, 100, -1]
     }"
-    :options="{
-      itemsPerPage: 20
-    }"
+    :items-per-page.sync="nodeTableItems"
     item-key="node_id"
     class="elevation-1"
   >
