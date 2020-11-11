@@ -42,21 +42,30 @@ export class NodeCollection {
   }
 
   equals (properties, value) {
-    return this.filter(properties, nodeValue => this._isUndefined(value) || value === nodeValue)
+    return this.filter(
+      properties,
+      nodeValue => this._isUndefined(value) || value === nodeValue
+    )
   }
 
   betweenNumber (properties, minValue, maxValue) {
-    return this.filter(properties, nodeValue =>
-      (this._isUndefined(minValue) || minValue <= nodeValue) &&
-      (this._isUndefined(maxValue) || maxValue >= nodeValue)
+    return this.filter(
+      properties,
+      nodeValue =>
+        (this._isUndefined(minValue) || minValue <= nodeValue) &&
+        (this._isUndefined(maxValue) || maxValue >= nodeValue)
     )
   }
 
   betweenDate (properties, minValue, maxValue) {
     return this.filter(properties, nodeValue => {
       const nodeValueTime = new Date(nodeValue).getTime()
-      return (this._isUndefined(minValue) || new Date(minValue).getTime() <= nodeValueTime) &&
-        (this._isUndefined(maxValue) || new Date(maxValue).getTime() >= nodeValueTime)
+      return (
+        (this._isUndefined(minValue) ||
+          new Date(minValue).getTime() <= nodeValueTime) &&
+        (this._isUndefined(maxValue) ||
+          new Date(maxValue).getTime() >= nodeValueTime)
+      )
     })
   }
 

@@ -48,7 +48,7 @@ export default {
       return node.ready ? `${node.product}${manufacturer}` : ''
     }
   },
-  mounted: function () {
+  mounted () {
     this.filters = this.initFilters()
   },
   computed: {
@@ -56,15 +56,22 @@ export default {
       return new NodeCollection(this.nodes)
     },
     relevantNodes () {
-      return this.nodeCollection
-        .filter('failed', failed => {
-          return (this.showHidden ? true : !failed)
-        })
+      return this.nodeCollection.filter('failed', failed => {
+        return this.showHidden ? true : !failed
+      })
     },
     filteredNodes () {
       return this.relevantNodes
-        .betweenNumber('node_id', this.filters.ids ? this.filters.ids.min : null, this.filters.ids ? this.filters.ids.max : null)
-        .betweenDate('lastActive', this.filters.lastActives ? this.filters.lastActives.min : null, this.filters.lastActives ? this.filters.lastActives.max : null)
+        .betweenNumber(
+          'node_id',
+          this.filters.ids ? this.filters.ids.min : null,
+          this.filters.ids ? this.filters.ids.max : null
+        )
+        .betweenDate(
+          'lastActive',
+          this.filters.lastActives ? this.filters.lastActives.min : null,
+          this.filters.lastActives ? this.filters.lastActives.max : null
+        )
 
         .contains(
           ['product', 'manufacturer'],
@@ -72,17 +79,68 @@ export default {
         )
         .contains(['type'], this.filters.types ? this.filters.types.search : '')
         .contains(['name'], this.filters.names ? this.filters.names.search : '')
-        .contains(['loc'], this.filters.locations ? this.filters.locations.search : '')
-        .contains(['status'], this.filters.states ? this.filters.states.search : '')
+        .contains(
+          ['loc'],
+          this.filters.locations ? this.filters.locations.search : ''
+        )
+        .contains(
+          ['status'],
+          this.filters.states ? this.filters.states.search : ''
+        )
 
-        .equalsAny('node_id', this.filters.ids ? (this.filters.ids.selections ? this.filters.ids.selections : []) : [])
-        .equalsAny('type', this.filters.types ? (this.filters.types.selections ? this.filters.types.selections : []) : [])
-        .equalsAny('product', this.filters.products ? (this.filters.products.selections ? this.filters.products.selections : []) : [])
-        .equalsAny('name', this.filters.names ? (this.filters.names.selections ? this.filters.names.selections : []) : [])
-        .equalsAny('loc', this.filters.locations ? (this.filters.locations.selections ? this.filters.locations.selections : []) : [])
-        .equalsAny('status', this.filters.states ? (this.filters.states.selections ? this.filters.states.selections : []) : [])
+        .equalsAny(
+          'node_id',
+          this.filters.ids
+            ? this.filters.ids.selections
+              ? this.filters.ids.selections
+              : []
+            : []
+        )
+        .equalsAny(
+          'type',
+          this.filters.types
+            ? this.filters.types.selections
+              ? this.filters.types.selections
+              : []
+            : []
+        )
+        .equalsAny(
+          'product',
+          this.filters.products
+            ? this.filters.products.selections
+              ? this.filters.products.selections
+              : []
+            : []
+        )
+        .equalsAny(
+          'name',
+          this.filters.names
+            ? this.filters.names.selections
+              ? this.filters.names.selections
+              : []
+            : []
+        )
+        .equalsAny(
+          'loc',
+          this.filters.locations
+            ? this.filters.locations.selections
+              ? this.filters.locations.selections
+              : []
+            : []
+        )
+        .equalsAny(
+          'status',
+          this.filters.states
+            ? this.filters.states.selections
+              ? this.filters.states.selections
+              : []
+            : []
+        )
 
-        .equals('secure', this.filters.secures ? this.filters.secures.bool : null)
+        .equals(
+          'secure',
+          this.filters.secures ? this.filters.secures.bool : null
+        )
     },
     tableNodes () {
       return this.filteredNodes.nodes

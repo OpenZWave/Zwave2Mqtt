@@ -12,25 +12,16 @@
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-btn
-        color="blue darken-1"
-        text
-        @click.native="resetFilter()"
+      <v-btn color="blue darken-1" text @click.native="resetFilter()"
         >Reset Filter</v-btn
       >
     </template>
     <template v-slot:header.node_id="{ header }">
-      <filter-options
-        v-model="filters.ids"
-        :items="ids"
-      ></filter-options>
+      <filter-options v-model="filters.ids" :items="ids"></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.type="{ header }">
-      <filter-options
-        v-model="filters.types"
-        :items="types"
-      ></filter-options>
+      <filter-options v-model="filters.types" :items="types"></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.product="{ header }">
@@ -41,10 +32,7 @@
       {{ header.text }}
     </template>
     <template v-slot:header.name="{ header }">
-      <filter-options
-        v-model="filters.names"
-        :items="names"
-      ></filter-options>
+      <filter-options v-model="filters.names" :items="names"></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.loc="{ header }">
@@ -62,10 +50,7 @@
       {{ header.text }}
     </template>
     <template v-slot:header.status="{ header }">
-      <filter-options
-        v-model="filters.states"
-        :items="states"
-      ></filter-options>
+      <filter-options v-model="filters.states" :items="states"></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.lastActive="{ header }">

@@ -197,9 +197,7 @@ describe('NodeCollection', () => {
         { id: 30, sample: 30 }
       ])
       const filtered = collection.betweenNumber('id', 15, 25)
-      chai.expect(filtered.nodes).to.eql([
-        { id: 20, sample: 20 }
-      ])
+      chai.expect(filtered.nodes).to.eql([{ id: 20, sample: 20 }])
     })
   })
   describe('#betweenDate', () => {
@@ -209,7 +207,11 @@ describe('NodeCollection', () => {
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
         { id: 30, lastActive: new Date(2020, 11, 11, 0, 0) }
       ])
-      const filtered = collection.betweenDate('lastActive', undefined, undefined)
+      const filtered = collection.betweenDate(
+        'lastActive',
+        undefined,
+        undefined
+      )
       chai.expect(filtered.nodes).to.eql([
         { id: 10, lastActive: new Date(2020, 11, 9, 0, 0) },
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
@@ -235,7 +237,11 @@ describe('NodeCollection', () => {
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
         { id: 30, lastActive: new Date(2020, 11, 11, 0, 0) }
       ])
-      const filtered = collection.betweenDate('lastActive', new Date(2020, 11, 10, 0, 0), null)
+      const filtered = collection.betweenDate(
+        'lastActive',
+        new Date(2020, 11, 10, 0, 0),
+        null
+      )
       chai.expect(filtered.nodes).to.eql([
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
         { id: 30, lastActive: new Date(2020, 11, 11, 0, 0) }
@@ -247,7 +253,11 @@ describe('NodeCollection', () => {
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
         { id: 30, lastActive: new Date(2020, 11, 11, 0, 0) }
       ])
-      const filtered = collection.betweenDate('lastActive', null, new Date(2020, 11, 10, 0, 0))
+      const filtered = collection.betweenDate(
+        'lastActive',
+        null,
+        new Date(2020, 11, 10, 0, 0)
+      )
       chai.expect(filtered.nodes).to.eql([
         { id: 10, lastActive: new Date(2020, 11, 9, 0, 0) },
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) }
@@ -259,10 +269,14 @@ describe('NodeCollection', () => {
         { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) },
         { id: 30, lastActive: new Date(2020, 11, 11, 0, 0) }
       ])
-      const filtered = collection.betweenDate('lastActive', new Date(2020, 11, 9, 12, 0), new Date(2020, 11, 10, 12, 0))
-      chai.expect(filtered.nodes).to.eql([
-        { id: 20, lastActive: new Date(2020, 11, 10, 0, 0) }
-      ])
+      const filtered = collection.betweenDate(
+        'lastActive',
+        new Date(2020, 11, 9, 12, 0),
+        new Date(2020, 11, 10, 12, 0)
+      )
+      chai
+        .expect(filtered.nodes)
+        .to.eql([{ id: 20, lastActive: new Date(2020, 11, 10, 0, 0) }])
     })
   })
   describe('#values', () => {

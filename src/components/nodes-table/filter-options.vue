@@ -1,11 +1,9 @@
 <template>
-  <v-menu
-    :value="show"
-    :close-on-content-click="false"
-    :offset-y="true"
-  >
+  <v-menu :value="show" :close-on-content-click="false" :offset-y="true">
     <template v-slot:activator="{ on, attrs }">
-      <v-icon small v-on:click="showOptions()"
+      <v-icon
+        small
+        v-on:click="showOptions()"
         v-bind="attrs"
         v-on="on"
         title="Filter options..."
@@ -16,7 +14,7 @@
     <v-card>
       <v-icon small v-on:click="hideOptions()" right>close</v-icon>
       <v-card-text>
-        <v-row v-if="value && value.type=='string'">
+        <v-row v-if="value && value.type == 'string'">
           <v-col>
             <v-text-field
               ref="search"
@@ -28,21 +26,43 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="value && value.type=='number'">
+        <v-row v-if="value && value.type == 'number'">
           <v-col>
-            <v-text-field type="number" label="Min" v-model="value.min" clearable></v-text-field>
+            <v-text-field
+              type="number"
+              label="Min"
+              v-model="value.min"
+              clearable
+            ></v-text-field>
           </v-col>
           <v-col>
-            <v-text-field type="number" label="Max" v-model="value.max" clearable></v-text-field>
+            <v-text-field
+              type="number"
+              label="Max"
+              v-model="value.max"
+              clearable
+            ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="value && value.type=='date'">
+        <v-row v-if="value && value.type == 'date'">
           <v-col>
-            <v-text-field type="datetime-local" label="From" v-model="value.min" clearable></v-text-field>
-            <v-text-field type="datetime-local" label="Until" v-model="value.max" clearable></v-text-field>
+            <v-text-field
+              type="datetime-local"
+              label="From"
+              v-model="value.min"
+              clearable
+            ></v-text-field>
+            <v-text-field
+              type="datetime-local"
+              label="Until"
+              v-model="value.max"
+              clearable
+            ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="value && (value.type=='string' || value.type=='number')">
+        <v-row
+          v-if="value && (value.type == 'string' || value.type == 'number')"
+        >
           <v-col>
             <v-select
               v-model="value.selections"
@@ -56,9 +76,13 @@
             ></v-select>
           </v-col>
         </v-row>
-        <v-row v-if="value && value.type=='boolean'">
+        <v-row v-if="value && value.type == 'boolean'">
           <v-col>
-            <v-checkbox :indeterminate="value.bool == undefined || value.bool == null" v-model="value.bool" label="Boolean value"></v-checkbox>
+            <v-checkbox
+              :indeterminate="value.bool == undefined || value.bool == null"
+              v-model="value.bool"
+              label="Boolean value"
+            ></v-checkbox>
           </v-col>
         </v-row>
       </v-card-text>
@@ -87,14 +111,19 @@ export default {
   },
   computed: {
     hasFilter () {
-      return this.value !== undefined && this.value !== null &&
-        (
-          (this.value.search !== undefined && this.value.search !== null && this.value.search !== '') ||
-          (this.value.selections !== undefined && this.value.selections !== null && this.value.selections.length > 0) ||
+      return (
+        this.value !== undefined &&
+        this.value !== null &&
+        ((this.value.search !== undefined &&
+          this.value.search !== null &&
+          this.value.search !== '') ||
+          (this.value.selections !== undefined &&
+            this.value.selections !== null &&
+            this.value.selections.length > 0) ||
           (this.value.min !== undefined && this.value.min !== null) ||
           (this.value.max !== undefined && this.value.max !== null) ||
-          (this.value.bool !== undefined && this.value.bool !== null)
-        )
+          (this.value.bool !== undefined && this.value.bool !== null))
+      )
     }
   },
   methods: {
