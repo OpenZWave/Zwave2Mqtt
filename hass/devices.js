@@ -87,13 +87,22 @@ const SPIRIT_ZWAVE_PLUS = {
   type: 'climate',
   object_id: 'thermostat',
   values: ['64-1-0', '49-1-1', '67-1-1', '67-1-11'],
-  mode_map: { off: 'Off', heat: 'Heat', cool: 'Heat Eco' },
-  setpoint_topic: { Heat: '67-1-1', 'Heat Eco': '67-1-11' },
+  mode_map: {
+    off: 'Off',
+    heat: 'Heat',
+    cool: 'Heat Eco',
+    drying: 'Full Power'
+  },
+  setpoint_topic: {
+    Heat: '67-1-1',
+    'Heat Eco': '67-1-11',
+    'Full Power': '67-1-1'
+  },
   default_setpoint: '67-1-1',
   discovery_payload: {
     min_temp: 8,
     max_temp: 28,
-    modes: ['off', 'heat', 'cool'],
+    modes: ['off', 'heat', 'cool', 'drying'],
     mode_state_topic: '64-1-0',
     mode_command_topic: true,
     current_temperature_topic: '49-1-1',
@@ -345,5 +354,6 @@ module.exports = {
   '328-2-3': [SPIRIT_ZWAVE_PLUS],
   '328-3-3': [SPIRIT_ZWAVE_PLUS],
   '345-82-3': [COVER], // Qubino flush shutter
-  '622-23089-17235': [COVER] // Graber/Bali/Spring Fashion Covers
+  '622-23089-17235': [COVER], // Graber/Bali/Spring Fashion Covers
+  '881-21-2': [SPIRIT_ZWAVE_PLUS] // Eurotronic Spirit / Aeotec ZWA021
 }

@@ -47,7 +47,7 @@
             </v-flex>
 
             <v-flex xs12 sm6 md3 align-self-center>
-              <v-btn icon @click.native="importConfiguration">
+              <v-btn icon @click="importConfiguration">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-icon dark color="primary" v-on="on">file_upload</v-icon>
@@ -55,7 +55,7 @@
                   <span>Import nodes.json Configuration</span>
                 </v-tooltip>
               </v-btn>
-              <v-btn icon @click.native="exportConfiguration">
+              <v-btn icon @click="exportConfiguration">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-icon dark color="primary" v-on="on"
@@ -75,49 +75,11 @@
           </v-flex>
         </v-layout>
 
-        <v-data-table
-          :headers="headers"
-          :items="tableNodes"
-          :footer-props="{
-            itemsPerPageOptions: [10, 20, { text: 'All', value: -1 }]
-          }"
-          item-key="node_id"
-          class="elevation-1"
-        >
-          <template v-slot:item="{ item }">
-            <tr
-              :style="{
-                cursor: 'pointer',
-                background:
-                  selectedNode === item
-                    ? $vuetify.theme.themes.light.accent
-                    : 'none'
-              }"
-              @click.stop="selectNode(item)"
-            >
-              <td>{{ item.node_id }}</td>
-              <td>{{ item.type }}</td>
-              <td>
-                {{
-                  item.ready
-                    ? item.product + ' (' + item.manufacturer + ')'
-                    : ''
-                }}
-              </td>
-              <td>{{ item.name || '' }}</td>
-              <td>{{ item.loc || '' }}</td>
-              <td>{{ item.secure ? 'Yes' : 'No' }}</td>
-              <td>{{ item.status }}</td>
-              <td>
-                {{
-                  item.lastActive
-                    ? new Date(item.lastActive).toLocaleString()
-                    : 'Never'
-                }}
-              </td>
-            </tr>
-          </template>
-        </v-data-table>
+        <nodes-table
+          :nodes="nodes"
+          :showHidden="showHidden"
+          v-on:node-selected="selectNode"
+        />
 
         <v-tabs style="margin-top:10px" v-model="currentTab" fixed-tabs>
           <v-tab key="node">Node</v-tab>
@@ -286,25 +248,22 @@
                       <v-btn
                         color="blue darken-1"
                         text
-                        @click.native="storeDevices(false)"
+                        @click="storeDevices(false)"
                         >Store</v-btn
                       >
                       <v-btn
                         color="red darken-1"
                         text
-                        @click.native="storeDevices(true)"
+                        @click="storeDevices(true)"
                         >Remove Store</v-btn
                       >
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        @click.native="rediscoverNode"
+                      <v-btn color="green darken-1" text @click="rediscoverNode"
                         >Rediscover Node</v-btn
                       >
                       <v-btn
                         color="yellow darken-1"
                         text
-                        @click.native="disableDiscovery"
+                        @click="disableDiscovery"
                         >Disable Discovery</v-btn
                       >
 
@@ -344,7 +303,7 @@
                         color="blue darken-1"
                         :disabled="errorDevice"
                         text
-                        @click.native="addDevice"
+                        @click="addDevice"
                         >Add</v-btn
                       >
                       <v-btn
@@ -352,7 +311,7 @@
                         color="blue darken-1"
                         :disabled="errorDevice"
                         text
-                        @click.native="updateDevice"
+                        @click="updateDevice"
                         >Update</v-btn
                       >
                       <v-btn
@@ -360,7 +319,7 @@
                         color="green darken-1"
                         :disabled="errorDevice"
                         text
-                        @click.native="rediscoverDevice"
+                        @click="rediscoverDevice"
                         >Rediscover</v-btn
                       >
                       <v-btn
@@ -368,7 +327,7 @@
                         color="red darken-1"
                         :disabled="errorDevice"
                         text
-                        @click.native="deleteDevice"
+                        @click="deleteDevice"
                         >Delete</v-btn
                       >
                       <v-textarea
@@ -454,7 +413,7 @@
                     <v-btn
                       rounded
                       color="primary"
-                      @click.native="addAssociation"
+                      @click="addAssociation"
                       dark
                       class="mb-2"
                       >Add</v-btn
@@ -462,7 +421,7 @@
                     <v-btn
                       rounded
                       color="primary"
-                      @click.native="removeAssociation"
+                      @click="removeAssociation"
                       dark
                       class="mb-2"
                       >Remove</v-btn
@@ -477,11 +436,11 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12>
-                    <v-btn text @click.native="importScenes">
+                    <v-btn text @click="importScenes">
                       Import
                       <v-icon right dark color="primary">file_upload</v-icon>
                     </v-btn>
-                    <v-btn text @click.native="exportScenes">
+                    <v-btn text @click="exportScenes">
                       Export
                       <v-icon right dark color="primary">file_download</v-icon>
                     </v-btn>
@@ -616,6 +575,7 @@ import Confirm from '@/components/Confirm'
 import AnsiUp from 'ansi_up'
 
 import DialogSceneValue from '@/components/dialogs/DialogSceneValue'
+import NodesTable from '@/components/nodes-table'
 
 const ansiUp = new AnsiUp()
 
@@ -631,7 +591,8 @@ export default {
   components: {
     ValueID,
     DialogSceneValue,
-    Confirm
+    Confirm,
+    NodesTable
   },
   computed: {
     scenesWithId () {
@@ -642,9 +603,6 @@ export default {
     },
     dialogTitle () {
       return this.editedIndex === -1 ? 'New Value' : 'Edit Value'
-    },
-    tableNodes () {
-      return this.showHidden ? this.nodes : this.nodes.filter(n => !n.failed)
     },
     hassDevices () {
       var devices = []
@@ -679,20 +637,10 @@ export default {
       val || this.closeDialog()
     },
     newName (val) {
-      var match = val
-        ? val.match(/[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF0-9_-]+/g)
-        : [val]
-
-      this.nameError =
-        match[0] !== val ? 'Only a-zA-Z0-9_- chars are allowed' : null
+      this.nameError = this.validateTopic(val)
     },
     newLoc (val) {
-      var match = val
-        ? val.match(/[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF0-9_-]+/g)
-        : [val]
-
-      this.locError =
-        match[0] !== val ? 'Only a-zA-Z0-9_- chars are allowed' : null
+      this.locError = this.validateTopic(val)
     },
     selectedNode () {
       if (this.selectedNode) {
@@ -877,16 +825,6 @@ export default {
       locError: null,
       newLoc: '',
       selectedNode: null,
-      headers: [
-        { text: 'ID', value: 'node_id' },
-        { text: 'Type', value: 'type' },
-        { text: 'Product', value: 'product' },
-        { text: 'Name', value: 'name' },
-        { text: 'Location', value: 'loc' },
-        { text: 'Secure', value: 'secure' },
-        { text: 'Status', value: 'status' },
-        { text: 'Last Active', value: 'lastActive' }
-      ],
       rules: {
         required: value => {
           var valid = false
@@ -903,13 +841,20 @@ export default {
     showSnackbar (text) {
       this.$emit('showSnackbar', text)
     },
-    selectNode (item) {
-      if (!item) return
+    validateTopic (name) {
+      var match = name
+        ? name.match(/[/a-zA-Z\u00C0-\u024F\u1E00-\u1EFF0-9_-]+/g)
+        : [name]
 
-      if (this.selectedNode === item) {
+      return match[0] !== name ? 'Only a-zA-Z0-9_- chars are allowed' : null
+    },
+    selectNode ({ node }) {
+      if (!node) return
+
+      if (this.selectedNode === node) {
         this.selectedNode = null
       } else {
-        this.selectedNode = this.nodes.find(n => n.node_id === item.node_id)
+        this.selectedNode = this.nodes.find(n => n.node_id === node.node_id)
       }
     },
     getValue (v) {
