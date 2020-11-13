@@ -5,6 +5,8 @@
     :footer-props="{
       itemsPerPageOptions: [10, 20, 50, 100, -1]
     }"
+    :sort-desc.sync="sorting.desc"
+    :sort-by.sync="sorting.by"
     :items-per-page.sync="nodeTableItems"
     item-key="node_id"
     class="elevation-1"
@@ -15,35 +17,41 @@
       >
     </template>
     <template v-slot:header.node_id="{ header }">
-      <filter-options v-model="filters.ids" :items="ids"></filter-options>
+      <filter-options v-model="filters.ids" :items.sync="ids"></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.type="{ header }">
-      <filter-options v-model="filters.types" :items="types"></filter-options>
+      <filter-options
+        v-model="filters.types"
+        :items.sync="types"
+      ></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.product="{ header }">
       <filter-options
         v-model="filters.products"
-        :items="products"
+        :items.sync="products"
       ></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.name="{ header }">
-      <filter-options v-model="filters.names" :items="names"></filter-options>
+      <filter-options
+        v-model="filters.names"
+        :items.sync="names"
+      ></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.loc="{ header }">
       <filter-options
         v-model="filters.locations"
-        :items="locations"
+        :items.sync="locations"
       ></filter-options>
       {{ header.text }}
     </template>
     <template v-slot:header.secure="{ header }">
       <filter-options
         v-model="filters.secures"
-        :items="secures"
+        :items.sync="secures"
       ></filter-options>
       {{ header.text }}
     </template>
@@ -54,7 +62,7 @@
     <template v-slot:header.lastActive="{ header }">
       <filter-options
         v-model="filters.lastActives"
-        :items="lastActives"
+        :items.sync="lastActives"
       ></filter-options>
       {{ header.text }}
     </template>

@@ -13,6 +13,7 @@ export default {
     nodeTableItems: 10,
     selectedNode: undefined,
     filters: {},
+    sorting: {},
     headers: [
       { text: 'ID', value: 'node_id' },
       { text: 'Type', value: 'type' },
@@ -37,6 +38,31 @@ export default {
         lastActives: { type: 'date' }
       }
     },
+    initSorting () {
+      return {
+        by: ['node_id'],
+        desc: [false]
+      }
+    },
+    loadObject (key, defaultValue) {
+      let filtersStr = localStorage.getItem(key)
+      let filters
+      try {
+        filters = JSON.parse(filtersStr)
+      } catch (e) {
+        filters = undefined
+      }
+      if (
+        !filters ||
+        (Object.keys(filters).length === 0 && filters.constructor === Object)
+      ) {
+        filters = defaultValue
+      }
+      return filters
+    },
+    storeObject (key, val) {
+      localStorage.setItem(key, JSON.stringify(val))
+    },
     resetFilter () {
       this.filters = this.initFilters()
     },
@@ -53,10 +79,24 @@ export default {
     this.filters = this.initFilters()
     const itemsPerPage = parseInt(localStorage.getItem('nodes_itemsPerPage'))
     this.nodeTableItems = !isNaN(itemsPerPage) ? itemsPerPage : 10
+    this.filters = this.loadObject('nodes_filters', this.initFilters())
+    this.sorting = this.loadObject('nodes_sorting', this.initSorting())
   },
   watch: {
     nodeTableItems (val) {
       localStorage.setItem('nodes_itemsPerPage', val)
+    },
+    filters: {
+      handler (val) {
+        this.storeObject('nodes_filters', val)
+      },
+      deep: true
+    },
+    sorting: {
+      handler (val) {
+        this.storeObject('nodes_sorting', val)
+      },
+      deep: true
     }
   },
   computed: {
