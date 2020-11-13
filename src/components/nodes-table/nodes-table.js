@@ -45,7 +45,7 @@ export default {
       }
     },
     loadObject (key, defaultValue) {
-      let filtersStr = localStorage.getItem(key)
+      const filtersStr = localStorage.getItem(key)
       let filters
       try {
         filters = JSON.parse(filtersStr)
