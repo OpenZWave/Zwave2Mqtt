@@ -10,7 +10,7 @@ export default {
     filterOptions
   },
   data: () => ({
-    nodeTableItems: 10,
+    nodeTableItems: undefined,
     selectedNode: undefined,
     filters: {},
     sorting: {},
@@ -44,24 +44,41 @@ export default {
         desc: [false]
       }
     },
-    loadObject (key, defaultValue) {
-      const filtersStr = localStorage.getItem(key)
-      let filters
-      try {
-        filters = JSON.parse(filtersStr)
-      } catch (e) {
-        filters = undefined
+    loadSetting (key, defaultVal) {
+      // Supports values of type 'string', 'number' and 'object'
+      // A default value is required to determine the type.
+      const valStr = localStorage.getItem(key)
+      let val
+      let type = typeof defaultVal
+      switch (type) {
+        case 'number':
+          val = isNaN(valStr) ? defaultVal : Number(val)
+          break
+        case 'string':
+          val = valStr || valStr == '' ? valStr : defaultVal
+          break
+        case 'object':
+          try {
+            val = JSON.parse(valStr)
+          } catch (e) {
+            val = undefined
+          }
+          val =
+            val && (Object.keys(val).length !== 0 || val.constructor === Object)
+              ? val
+              : defaultVal
+          break
       }
-      if (
-        !filters ||
-        (Object.keys(filters).length === 0 && filters.constructor === Object)
-      ) {
-        filters = defaultValue
-      }
-      return filters
+      return val
     },
-    storeObject (key, val) {
-      localStorage.setItem(key, JSON.stringify(val))
+    storeSetting (key, val) {
+      let valStr
+      if (typeof val === 'object') {
+        valStr = JSON.stringify(val)
+      } else {
+        valStr = String(val)
+      }
+      localStorage.setItem(key, valStr)
     },
     resetFilter () {
       this.filters = this.initFilters()
@@ -76,25 +93,23 @@ export default {
     }
   },
   mounted () {
-    this.filters = this.initFilters()
-    const itemsPerPage = parseInt(localStorage.getItem('nodes_itemsPerPage'))
-    this.nodeTableItems = !isNaN(itemsPerPage) ? itemsPerPage : 10
-    this.filters = this.loadObject('nodes_filters', this.initFilters())
-    this.sorting = this.loadObject('nodes_sorting', this.initSorting())
+    this.nodeTableItems = this.loadSetting('nodes_itemsPerPage', 10)
+    this.filters = this.loadSetting('nodes_filters', this.initFilters())
+    this.sorting = this.loadSetting('nodes_sorting', this.initSorting())
   },
   watch: {
     nodeTableItems (val) {
-      localStorage.setItem('nodes_itemsPerPage', val)
+      this.storeSetting('nodes_itemsPerPage', val)
     },
     filters: {
       handler (val) {
-        this.storeObject('nodes_filters', val)
+        this.storeSetting('nodes_filters', val)
       },
       deep: true
     },
     sorting: {
       handler (val) {
-        this.storeObject('nodes_sorting', val)
+        this.storeSetting('nodes_sorting', val)
       },
       deep: true
     }
