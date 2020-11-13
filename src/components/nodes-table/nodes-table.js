@@ -48,14 +48,14 @@ export default {
       // Supports values of type 'string', 'number' and 'object'
       // A default value is required to determine the type.
       const valStr = localStorage.getItem(key)
+      const type = typeof defaultVal
       let val
-      let type = typeof defaultVal
       switch (type) {
         case 'number':
           val = isNaN(valStr) ? defaultVal : Number(val)
           break
         case 'string':
-          val = valStr || valStr == '' ? valStr : defaultVal
+          val = valStr || valStr === '' ? valStr : defaultVal
           break
         case 'object':
           try {
