@@ -6,9 +6,11 @@ class LocalStorageMock {
     this.items = {}
     this.isMocked = true
   }
+
   getItem (key) {
     return this.items[key]
   }
+
   setItem (key, val) {
     this.items[key] = val
   }
@@ -25,7 +27,7 @@ describe('Settings', () => {
     it('store a non-object', () => {
       const settings = new Settings(new LocalStorageMock())
       settings.store('key', 10)
-      chai.expect(settings.storage.items['key']).to.eql('10')
+      chai.expect(settings.storage.items.key).to.eql('10')
     })
   })
   describe('#store(object)', () => {

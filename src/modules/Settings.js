@@ -1,6 +1,6 @@
 export class Settings {
   constructor (storage) {
-    this.storage = storage ? storage : localStorage
+    this.storage = storage || localStorage
   }
 
   load (key, defaultVal) {
