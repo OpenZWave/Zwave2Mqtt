@@ -1,4 +1,4 @@
-class Settings {
+export class Settings {
   constructor (storage) {
     this.storage = storage ? storage : localStorage
   }
@@ -45,4 +45,4 @@ class Settings {
   }
 }
 
-module.exports = Settings
+export default Settings

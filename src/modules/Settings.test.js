@@ -1,7 +1,5 @@
-const chai = require('chai')
-const rewire = require('rewire')
-
-const Settings = rewire('../../src/modules/Settings')
+import chai from 'chai'
+import { Settings } from './Settings'
 
 class LocalStorageMock {
   constructor () {
