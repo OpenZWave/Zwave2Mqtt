@@ -1,11 +1,19 @@
+/**
+ * Type-safe way to store and load settings from localStorage.
+ * It supports the data types 'boolean', 'number', 'string' and 'object'.
+ */
 export class Settings {
   constructor (storage) {
     this.storage = storage || localStorage
   }
 
+  /**
+   * Load a setting from the local storage.
+   * @param {String} key Key of the setting
+   * @param {*} defaultVal Default value of the setting
+   * @return Loaded setting
+   */
   load (key, defaultVal) {
-    // Supports values of type 'string', 'number' and 'object'
-    // A default value is required to determine the type.
     const valStr = this.storage.getItem(key)
     const type = typeof defaultVal
     let val
@@ -34,6 +42,11 @@ export class Settings {
     return val
   }
 
+  /**
+   * Store a setting to the local storage.
+   * @param {String} key Key of the setting
+   * @param {*} val Value of the setting
+   */
   store (key, val) {
     let valStr
     if (typeof val === 'object') {
