@@ -1,4 +1,5 @@
 import { NodeCollection } from '@/modules/NodeCollection'
+import { Settings } from '@/modules/Settings'
 import filterOptions from '@/components/nodes-table/filter-options.vue'
 
 export default {
@@ -10,6 +11,7 @@ export default {
     filterOptions
   },
   data: () => ({
+    settings: new Settings(localStorage),
     nodeTableItems: undefined,
     selectedNode: undefined,
     filters: {},
@@ -45,40 +47,10 @@ export default {
       }
     },
     loadSetting (key, defaultVal) {
-      // Supports values of type 'string', 'number' and 'object'
-      // A default value is required to determine the type.
-      const valStr = localStorage.getItem(key)
-      const type = typeof defaultVal
-      let val
-      switch (type) {
-        case 'number':
-          val = isNaN(valStr) ? defaultVal : Number(val)
-          break
-        case 'string':
-          val = valStr || valStr === '' ? valStr : defaultVal
-          break
-        case 'object':
-          try {
-            val = JSON.parse(valStr)
-          } catch (e) {
-            val = undefined
-          }
-          val =
-            val && (Object.keys(val).length !== 0 || val.constructor === Object)
-              ? val
-              : defaultVal
-          break
-      }
-      return val
+      return this.settings.load(key, defaultVal)
     },
     storeSetting (key, val) {
-      let valStr
-      if (typeof val === 'object') {
-        valStr = JSON.stringify(val)
-      } else {
-        valStr = String(val)
-      }
-      localStorage.setItem(key, valStr)
+      this.settings.store(key, val)
     },
     resetFilter () {
       this.filters = this.initFilters()
