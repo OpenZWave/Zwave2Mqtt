@@ -65,9 +65,9 @@ export default {
     }
   },
   mounted () {
-    this.nodeTableItems = this.loadSetting('nodes_itemsPerPage', 10)
     this.filters = this.loadSetting('nodes_filters', this.initFilters())
     this.sorting = this.loadSetting('nodes_sorting', this.initSorting())
+    this.nodeTableItems = this.loadSetting('nodes_itemsPerPage', 10)
   },
   watch: {
     nodeTableItems (val) {
