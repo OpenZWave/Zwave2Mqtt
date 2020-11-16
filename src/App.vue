@@ -92,6 +92,7 @@
 // https://github.com/socketio/socket.io-client/blob/master/docs/API.md
 import io from 'socket.io-client'
 import ConfigApis from '@/apis/ConfigApis'
+import { Settings } from '@/modules/Settings'
 
 export default {
   name: 'app',
@@ -202,6 +203,7 @@ export default {
         hass: 'HASS_API',
         zwave: 'ZWAVE_API'
       },
+      settings: new Settings(localStorage),
       status: '',
       statusColor: '',
       drawer: false,
@@ -210,7 +212,7 @@ export default {
       title: '',
       snackbar: false,
       snackbarText: '',
-      dark: false,
+      dark: undefined,
       baseURI: ConfigApis.getBasePath()
     }
   },
@@ -219,9 +221,7 @@ export default {
       this.title = value.name || ''
     },
     dark (v) {
-      if (v) localStorage.setItem('dark', 'true')
-      else localStorage.removeItem('dark')
-
+      this.settings.store('dark', this.dark)
       this.$vuetify.theme.dark = v
       this.changeThemeColor()
     }
@@ -256,7 +256,7 @@ export default {
       this.toggleDrawer()
     }
 
-    this.dark = !!localStorage.getItem('dark')
+    this.dark = this.settings.load('dark', false)
     this.changeThemeColor()
   },
   beforeDestroy () {
