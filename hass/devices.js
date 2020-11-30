@@ -91,7 +91,7 @@ const SPIRIT_ZWAVE_PLUS = {
     off: 'Off',
     heat: 'Heat',
     cool: 'Heat Eco',
-    drying: 'Full Power'
+    dry: 'Full Power'
   },
   setpoint_topic: {
     Heat: '67-1-1',
@@ -102,7 +102,7 @@ const SPIRIT_ZWAVE_PLUS = {
   discovery_payload: {
     min_temp: 8,
     max_temp: 28,
-    modes: ['off', 'heat', 'cool', 'drying'],
+    modes: ['off', 'heat', 'cool', 'dry'],
     mode_state_topic: '64-1-0',
     mode_command_topic: true,
     current_temperature_topic: '49-1-1',
