@@ -214,6 +214,27 @@ module.exports = {
       }
     }
   ],
+  '411-515-3': [
+    // Heatit Thermostat TF 058 (ThermoFloor AS)
+    {
+      type: 'climate',
+      object_id: 'thermostat',
+      values: ['67-1-1','64-1-0','49-1-1'],
+      mode_map: {'off': 'Off', 'heat': 'Heat'},
+      default_setpoint: '67-1-1',
+      discovery_payload: {
+          min_temp: 5,
+          max_temp: 40,
+          modes: ['off', 'heat'],
+          mode_state_topic: '64-1-0',
+          mode_command_topic: true,
+          current_temperature_topic: '49-1-1',
+          current_temperature_template: '{{ value_json.value }}',
+          temperature_state_template: '{{ value_json.value }}',
+          temperature_command_topic: true
+      }
+    }
+  ],
   '798-1-5': [
     // Inovelli LZW42 Multi-Color Bulb
     {
