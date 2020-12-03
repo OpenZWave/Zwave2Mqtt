@@ -497,24 +497,28 @@ So in decimal format will become: `411-514-3`. This is the device id of `Heatit 
 #### Thermostats
 
 ```js
-{ // Heatit Thermostat TF 021 (ThermoFloor AS)
-    "type": "climate",
-    "object_id": "thermostat",
-    "values": ["64-1-0", "49-1-1", "67-1-1", "67-1-2"],
-    "mode_map": {"off": "Off", "heat": "Heat (Default)", "cool": "Cool"},
-    "setpoint_topic": { "Heat (Default)": "67-1-1", "Cool": "67-1-2" },
-    "default_setpoint": "67-1-1",
-    "discovery_payload": {
-        "min_temp": 15,
-        "max_temp": 30,
-        "modes": ["off", "heat", "cool"],
-        "mode_state_topic": "64-1-0",
-        "mode_command_topic": true,
-        "current_temperature_topic": "49-1-1",
-        "current_temperature_template": "{{ value_json.value }}",
-        "temperature_state_template": "{{ value_json.value }}",
-        "temperature_command_topic": true
-    }
+{
+    "411-1-1":[
+        { // Heatit Thermostat TF 021 (ThermoFloor AS)
+            "type": "climate",
+            "object_id": "thermostat",
+            "values": ["64-1-0", "49-1-1", "67-1-1", "67-1-2"],
+            "mode_map": {"off": "Off", "heat": "Heat (Default)", "cool": "Cool"},
+            "setpoint_topic": { "Heat (Default)": "67-1-1", "Cool": "67-1-2" },
+            "default_setpoint": "67-1-1",
+            "discovery_payload": {
+                "min_temp": 15,
+                "max_temp": 30,
+                "modes": ["off", "heat", "cool"],
+                "mode_state_topic": "64-1-0",
+                "mode_command_topic": true,
+                "current_temperature_topic": "49-1-1",
+                "current_temperature_template": "{{ value_json.value }}",
+                "temperature_state_template": "{{ value_json.value }}",
+                "temperature_command_topic": true
+            }
+        }
+    ]
 }
 ```
 
