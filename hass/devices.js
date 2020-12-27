@@ -170,6 +170,33 @@ module.exports = {
       }
     }
   ],
+  '271-4097-4865': [
+    // Fibaro Thermostat FGT 001
+    {
+      type: 'climate',
+      object_id: 'thermostat',
+      values: ['49-1-1', '64-1-0', '67-1-1'],
+      mode_map: {
+        off: 'Off',
+        heat: 'Heat'
+      },
+      setpoint_topic: {
+        Heat: '67-1-1'
+      },
+      default_setpoint: '67-1-1',
+      discovery_payload: {
+        min_temp: 10,
+        max_temp: 30,
+        modes: ['off', 'heat'],
+        current_temperature_topic: '49-1-1',
+        current_temperature_template: '{{ value_json.value }}',
+        mode_state_topic: '64-1-0',
+        mode_command_topic: true,
+        temperature_state_template: '{{ value_json.value }}',
+        temperature_command_topic: true
+      }
+    }
+  ]
   '411-1-1': [
     // Heatit Thermostat TF 021 (ThermoFloor AS)
     {
