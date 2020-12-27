@@ -196,7 +196,7 @@ module.exports = {
         temperature_command_topic: true
       }
     }
-  ]
+  ],
   '411-1-1': [
     // Heatit Thermostat TF 021 (ThermoFloor AS)
     {
