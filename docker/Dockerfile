@@ -1,6 +1,6 @@
 # ----------------
 # STEP 1:
-FROM chrisns/openzwave:alpine-1.6.1520 as ozw
+FROM chrisns/openzwave:alpine-1.6.1771 as ozw
 
 # ----------------
 # STEP 2:
