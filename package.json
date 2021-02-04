@@ -114,7 +114,7 @@
     "serialport": "^9.0.2",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.1",
+    "socket.io-client": "^3.1.1",
     "tail": "^2.0.4",
     "uniqid": "^5.2.0",
     "vue": "^2.6.12",
