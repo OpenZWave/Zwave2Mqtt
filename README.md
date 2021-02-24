@@ -26,6 +26,8 @@
 
 Fully configurable Zwave to MQTT **Gateway** and **Control Panel**.
 
+<h1>THIS PROJECT IS UNMAINTAINED. PLEASE CONSIDER MOVING TO <a href="https://github.com/zwave-js/zwavejs2mqtt">Zwavejs</a></h1>
+
 - **Backend**: [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [socket.io](https://github.com/socketio/socket.io), [Mqttjs](https://github.com/mqttjs/MQTT.js), [openzwave-shared](https://github.com/OpenZWave/node-openzwave-shared), [Webpack](https://webpack.js.org/)
 - **Frontend**: [Vue](https://vuejs.org/), [socket.io](https://github.com/socketio/socket.io), [Vuetify](https://github.com/vuetifyjs/vuetify)
 
